@@ -1,0 +1,8 @@
+export const COLORS = {
+  DARK_PRIMARY: "#10141F",
+  DARK_SECONDARY: "#161D2F",
+  WHITE: "#F0F0F5",
+  GRAY: "#CCC",
+  YELLOW: "#FAC305",
+  RED: "#FF4247",
+}
