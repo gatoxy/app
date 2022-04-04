@@ -7,6 +7,7 @@ import {
   Poppins_400Regular,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
+import { AppProvider } from './src/contexts/AppContext';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -14,11 +15,13 @@ export default function App() {
     Poppins_700Bold
   });
 
-  if(!fontsLoaded) {
+  if (!fontsLoaded) {
     return <AppLoading />
   }
 
   return (
-    <Home />
+    <AppProvider>
+      <Home />
+    </AppProvider>
   );
 }

@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
   },
 
   modalSummary: {
-    backgroundColor: "red",
     flex: 1,
   },
 
