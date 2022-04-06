@@ -29,6 +29,24 @@ export const styles = StyleSheet.create({
     fontSize: 18,
   },
 
+  modalSummaryRow: {
+    flexDirection: "row",
+    paddingBottom: 8,
+  },
+
+  year: {
+    color: COLORS.GRAY,
+  },
+
+  category: {
+    color: COLORS.GRAY,
+    paddingHorizontal: 16,
+  },
+
+  average: {
+    color: COLORS.GRAY,
+  },
+
   modalSummaryDescription: {
     color: COLORS.WHITE,
     fontFamily: FONTS.REGULAR,

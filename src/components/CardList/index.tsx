@@ -1,11 +1,11 @@
 import { ScrollView, Text, View } from "react-native";
-import { Movie, Serie } from "../../types";
+import { Media } from "../../types";
 import { CardItem } from "../CardItem";
 import { styles } from "./styles";
 
 interface Props {
   title: string;
-  data: Movie[] | Serie[];
+  data: Media[];
   media: "movie" | "serie";
 }
 
@@ -19,8 +19,8 @@ export function CardList({ title, data, media }: Props) {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
       >
-        {data.map(item => (
-          <CardItem
+        {data.map((item, index) => (
+          index < 10 && <CardItem
             key={item.id}
             data={item}
             media={media}

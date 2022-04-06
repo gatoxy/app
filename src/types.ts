@@ -1,17 +1,9 @@
-export type Movie = {
+export type Media = {
+  type: "movie" | "serie",
   id: number;
   poster_path: string | null;
   overview: string;
-  release_date: string;
   title: string;
-  vote_average: number;
-}
-
-export type Serie = {
-  id: number;
-  poster_path: string | null;
-  overview: string;
-  first_air_date: string;
-  name: string;
+  release_date: string;
   vote_average: number;
 }

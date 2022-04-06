@@ -25,7 +25,16 @@ export function Summary() {
           />
 
           <View style={styles.modalSummary}>
-            <Text style={styles.modalSummaryTitle}>Trivia Quest</Text>
+            <Text style={styles.modalSummaryTitle}>{mediaSelected?.title}</Text>
+
+            <View style={styles.modalSummaryRow}>
+              <Text style={styles.year}>
+                {mediaSelected && new Date(mediaSelected.release_date).getFullYear()}
+              </Text>
+              <Text style={styles.category}>{mediaSelected?.type === "movie" ? "Filme" : "Série"}</Text>
+              <Text style={styles.average}>{mediaSelected?.vote_average}</Text>
+            </View>
+
             <Text style={styles.modalSummaryDescription} numberOfLines={4} ellipsizeMode="tail">
               {mediaSelected?.overview}
             </Text>

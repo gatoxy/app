@@ -1,6 +1,6 @@
 import { Image, TouchableOpacity } from "react-native";
 import { useApp } from "../../contexts/AppContext";
-import { Movie, Serie } from "../../types";
+import { Media } from "../../types";
 import { styles } from "./styles";
 
 interface Props {
@@ -9,11 +9,11 @@ interface Props {
 }
 
 interface MovieItemProps {
-  data: Movie;
+  data: Media;
 }
 
 interface SerieItemProps {
-  data: Serie;
+  data: Media;
 }
 
 export function CardItem({ data, media }: Props) {
@@ -24,7 +24,7 @@ function MovieItem({ data }: MovieItemProps) {
   const { onOpenSummary } = useApp();
 
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.80} onPress={() => onOpenSummary(data.id, "movie")}>
+    <TouchableOpacity style={styles.container} activeOpacity={0.80} onPress={() => onOpenSummary("movie", data.id)}>
       <Image
         style={styles.image}
         source={{
@@ -39,7 +39,7 @@ function SerieItem({ data }: SerieItemProps) {
   const { onOpenSummary } = useApp();
 
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.80} onPress={() => onOpenSummary(data.id, "tv")}>
+    <TouchableOpacity style={styles.container} activeOpacity={0.80} onPress={() => onOpenSummary("tv", data.id)}>
       <Image
         style={styles.image}
         source={{

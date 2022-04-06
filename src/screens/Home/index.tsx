@@ -2,30 +2,38 @@ import { useEffect, useState } from "react";
 import { CardList } from "../../components/CardList";
 import { Layout } from "../../components/Layout";
 import { useApp } from "../../contexts/AppContext";
-import { Movie, Serie } from "../../types";
+import { Media } from "../../types";
 
 export function Home() {
-  const { upcoming, popular } = useApp();
+  const { getUpcoming, getPopular } = useApp();
 
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [series, setSeries] = useState<Serie[]>([]);
+  const [upcomingMovies, setUpcomingMovies] = useState<Media[]>([]);
+  const [popularMovies, setPopularMovies] = useState<Media[]>([]);
+  const [popularSeries, setPopularSeries] = useState<Media[]>([]);
 
   useEffect(() => {
-    popular("movie", 1).then(response => setMovies(response.results));
-    popular("tv", 1).then(response => setSeries(response.results));
+    getUpcoming("movie").then(response => setUpcomingMovies(response.results));
+    getPopular("movie", 1).then(response => setPopularMovies(response.results));
+    getPopular("tv", 1).then(response => setPopularSeries(response.results));
   }, []);
 
   return (
     <Layout>
       <CardList
+        title="Filmes que serão lançados em breve"
+        data={upcomingMovies}
+        media="movie"
+      />
+
+      <CardList
         title="Filmes recomendados para você"
-        data={movies}
+        data={popularMovies}
         media="movie"
       />
 
       <CardList
         title="Séries recomendadas para você"
-        data={series}
+        data={popularSeries}
         media="serie"
       />
     </Layout>

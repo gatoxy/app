@@ -1,52 +1,72 @@
-import { createContext, ReactNode, useContext, useRef, useState } from "react";
+import { createContext, ReactNode, RefObject, useContext, useRef, useState } from "react";
 import { Modalize } from "react-native-modalize";
+import { IHandles } from "react-native-modalize/lib/options";
 import { tmdb } from "../services/tmdb";
-import { Movie, Serie } from "../types";
+import { Media } from "../types";
 
 interface AppProviderProps {
   children: ReactNode;
 }
 
 interface AppContextData {
-  upcoming: (media: string) => Promise<Movie[]>;
-  popular: (media: string, page: number) => Promise<any>;
-  onOpenSummary: (id: number, media: string) => void;
-  modalizeRef: any,
-  mediaSelected: Movie | Serie | undefined,
+  getUpcoming: (media: "movie" | "tv") => Promise<TMDBResponseProps>;
+  getPopular: (media: "movie" | "tv", page: number) => Promise<TMDBResponseProps>;
+  onOpenSummary: (media: "movie" | "tv", id: number) => void;
+  modalizeRef: RefObject<IHandles>,
+  mediaSelected: Media | undefined,
 }
+
+interface TMDBResponseProps {
+  page: number,
+  results: Media[],
+  total_pages: number,
+  total_results: number;
+}
+
+// interface TMDBDetailsResponseProps {
+
+// }
 
 const AppContext = createContext({} as AppContextData);
 
 export function AppProvider({ children }: AppProviderProps) {
-  const [mediaSelected, setMediaSelected] = useState<Movie | Serie>();
+  const [mediaSelected, setMediaSelected] = useState<Media>();
 
   const modalizeRef = useRef<Modalize>(null);
 
-  function onOpenSummary(id: number, media: string) {
-    details(media, id).then(response => {
+  function onOpenSummary(media: "movie" | "tv", id: number) {
+    getDetails(media, id).then(response => {
       setMediaSelected(response);
       modalizeRef.current?.open();
-    })
+    });
   }
 
-  async function upcoming(media: string) {
-    const { data } = await tmdb.get(`/${media}/upcoming?language=pt-BR`);
-    return data.results;
+  async function getUpcoming(media: "movie" | "tv") {
+    const response = await tmdb.get<TMDBResponseProps>(`/${media}/upcoming?language=pt-BR`);
+    return response.data;
   }
 
-  async function popular(media: string, page: number) {
-    const { data } = await tmdb.get(`/${media}/popular?language=pt-BR&page=${page}`);
-    return data;
+  async function getPopular(media: "movie" | "tv", page: number) {
+    const response = await tmdb.get<TMDBResponseProps>(`/${media}/popular?language=pt-BR&page=${page}`);
+    return response.data;
   }
 
-  async function details(media: string, id: number) {
-    const { data } = await tmdb.get(`${media}/${id}?language=pt-BR`);
-    return data;
+  async function getDetails(media: "movie" | "tv", id: number) {
+    const response = await tmdb.get(`${media}/${id}?language=pt-BR`);
+
+    if(media === "tv") return {
+      ...response.data, 
+      type: "serie",
+      release_date: response.data.first_air_date, 
+      title: response.data.name
+    }
+
+    return { ...response.data,  type: "movie" };
   }
 
   return (
     <AppContext.Provider value={{
-      upcoming, popular, onOpenSummary, modalizeRef, mediaSelected,
+      getUpcoming, getPopular, onOpenSummary, modalizeRef, mediaSelected,
     }}>
       {children}
     </AppContext.Provider>
