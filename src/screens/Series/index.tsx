@@ -86,6 +86,7 @@ export function Series() {
         data={series}
         display="vertical"
         isLoading={loading}
+        showHowManyPages={true}
         currentPage={currentPage}
         numberPages={numberPages}
       />

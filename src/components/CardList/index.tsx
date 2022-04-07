@@ -9,24 +9,36 @@ interface Props {
   data: Array<TMDBItem>;
   display?: "vertical" | "horizontal";
   isLoading: boolean;
-  currentPage?: number,
-  numberPages?: number,
+  showHowManyPages?: boolean;
+  currentPage?: number;
+  numberPages?: number;
 }
 
-export function CardList({ title, data, display = "horizontal", isLoading, currentPage, numberPages }: Props) {
+export function CardList({ title, data, display = "horizontal", isLoading, showHowManyPages = false, currentPage, numberPages }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>{title}</Text>
 
-      {/* { currentPage && <Text style={styles.pages}>Página {currentPage} de {numberPages}</Text> } */}
+      {showHowManyPages && (
+        <Text style={styles.pages}>Página {currentPage} de {numberPages}</Text>
+      )}
 
       {isLoading ? <ActivityIndicator size="large" color={COLORS.DARK_SECONDARY} /> : (
-        <FlatList
-          horizontal={display === "horizontal" ? true : false}
-          data={data}
-          renderItem={({ item }) => <CardItem data={item} display={display} key={item.id} />}
-          showsHorizontalScrollIndicator={false}
-        />
+        <ScrollView horizontal={display === "horizontal" ? false : true}
+          contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: "center",
+            width: "100%"
+          }}
+        >
+          <FlatList
+            horizontal={display === "horizontal" ? true : false}
+            data={data}
+            renderItem={({ item }) => <CardItem data={item} display={display} key={item.id} />}
+            keyExtractor={item => item.id.toString()}
+            showsHorizontalScrollIndicator={false}
+          />
+        </ScrollView>
       )}
     </View>
   );

@@ -17,7 +17,7 @@ export function CardItem({ data, display }: Props) {
 
   if (display === "vertical") {
     return (
-      <TouchableOpacity style={styles.container} activeOpacity={0.80} onPress={() => onOpenSummary(data)}>
+      <TouchableOpacity style={styles.containerHorizontal} activeOpacity={0.80} onPress={() => onOpenSummary(data)}>
         <View style={styles.row}>
           <Image
             style={styles.backdropImage}
@@ -37,14 +37,14 @@ export function CardItem({ data, display }: Props) {
         </View>
 
         <TouchableOpacity style={styles.bookmarkButton} activeOpacity={0.70}>
-          <Feather name="bookmark" size={20} color={COLORS.GRAY} />
+          <Feather name="bookmark" size={16} color={COLORS.GRAY} />
         </TouchableOpacity>
       </TouchableOpacity>
     );
   }
 
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.80} onPress={() => onOpenSummary(data)}>
+    <TouchableOpacity style={styles.containerVertical} activeOpacity={0.80} onPress={() => onOpenSummary(data)}>
       <Image
         style={styles.posterImage}
         source={{

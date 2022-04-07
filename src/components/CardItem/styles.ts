@@ -2,12 +2,15 @@ import { StyleSheet } from "react-native";
 import { COLORS, FONTS } from "../../theme";
 
 export const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
+  containerVertical: {
     marginHorizontal: 4,
+  },
+
+  containerHorizontal: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginVertical: 4,
-    flex: 1,
   },
 
   posterImage: {
@@ -18,18 +21,16 @@ export const styles = StyleSheet.create({
   backdropImage: {
     width: 80,
     height: 45,
-    marginRight: 10,
-    borderRadius: 2,
+    marginRight: 8,
   },
 
   row: {
     flexDirection: "row",
-    alignItems: "center",
     flex: 1,
   },
 
   summary: {
-
+    flex: 1,
   },
 
   summaryTitle: {
@@ -58,11 +59,12 @@ export const styles = StyleSheet.create({
   },
 
   bookmarkButton: {
-    height: 36,
-    width: 36,
+    height: 34,
+    width: 34,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 36,
+    borderRadius: 34,
     backgroundColor: COLORS.DARK_SECONDARY,
+    marginLeft: 8,
   },
 });

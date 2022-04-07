@@ -87,6 +87,7 @@ export function Movies() {
         data={movies}
         display="vertical"
         isLoading={loading}
+        showHowManyPages={true}
         currentPage={currentPage}
         numberPages={numberPages}
       />
