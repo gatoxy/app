@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { CardList } from "../../components/CardList";
 import { Layout } from "../../components/Layout";
 import { useApp } from "../../contexts/AppContext";
-import { Media } from "../../types";
+import { TMDBItem } from "../../types";
 
 export function Home() {
   const { getUpcoming, getPopular } = useApp();
 
-  const [upcomingMovies, setUpcomingMovies] = useState<Media[]>([]);
-  const [popularMovies, setPopularMovies] = useState<Media[]>([]);
-  const [popularSeries, setPopularSeries] = useState<Media[]>([]);
+  const [upcomingMovies, setUpcomingMovies] = useState<TMDBItem[]>([]);
+  const [popularMovies, setPopularMovies] = useState<TMDBItem[]>([]);
+  const [popularSeries, setPopularSeries] = useState<TMDBItem[]>([]);
 
   useEffect(() => {
     getUpcoming("movie").then(response => setUpcomingMovies(response.results));
@@ -22,19 +22,16 @@ export function Home() {
       <CardList
         title="Filmes que serão lançados em breve"
         data={upcomingMovies}
-        media="movie"
       />
 
       <CardList
         title="Filmes recomendados para você"
         data={popularMovies}
-        media="movie"
       />
 
       <CardList
         title="Séries recomendadas para você"
         data={popularSeries}
-        media="serie"
       />
     </Layout>
   );

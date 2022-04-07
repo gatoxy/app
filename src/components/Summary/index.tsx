@@ -7,7 +7,7 @@ import { COLORS } from "../../theme";
 import { useApp } from "../../contexts/AppContext";
 
 export function Summary() {
-  const { modalizeRef, mediaSelected } = useApp();
+  const { modalizeRef, itemSelected } = useApp();
 
   return (
     <Modalize
@@ -20,23 +20,23 @@ export function Summary() {
           <Image
             style={styles.modalImage}
             source={{
-              uri: `https://image.tmdb.org/t/p/w500/${mediaSelected?.poster_path}`
+              uri: `https://image.tmdb.org/t/p/w500/${itemSelected.poster_path}`
             }}
           />
 
           <View style={styles.modalSummary}>
-            <Text style={styles.modalSummaryTitle}>{mediaSelected?.title}</Text>
+            <Text style={styles.modalSummaryTitle} numberOfLines={1} ellipsizeMode="tail">{itemSelected.title}</Text>
 
             <View style={styles.modalSummaryRow}>
               <Text style={styles.year}>
-                {mediaSelected && new Date(mediaSelected.release_date).getFullYear()}
+                {new Date(itemSelected.release_date).getFullYear()}
               </Text>
-              <Text style={styles.category}>{mediaSelected?.type === "movie" ? "Filme" : "Série"}</Text>
-              <Text style={styles.average}>{mediaSelected?.vote_average}</Text>
+              <Text style={styles.category}>{itemSelected.type === "movie" ? "Filme" : "Série"}</Text>
+              <Text style={styles.average}>{itemSelected.vote_average}</Text>
             </View>
 
             <Text style={styles.modalSummaryDescription} numberOfLines={4} ellipsizeMode="tail">
-              {mediaSelected?.overview}
+              {itemSelected.overview}
             </Text>
           </View>
         </View>

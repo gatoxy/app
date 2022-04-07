@@ -14,6 +14,13 @@ export const styles = StyleSheet.create({
     marginBottom: 12,
   },
 
+  pages: {
+    marginBottom: 12,
+    fontSize: 12,
+    color: COLORS.GRAY,
+    fontFamily: FONTS.REGULAR,
+  },
+
   cardListContainer: {
     
   },
