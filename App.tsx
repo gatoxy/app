@@ -9,17 +9,19 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import {
   useFonts,
-  Poppins_400Regular,
-  Poppins_700Bold,
-} from "@expo-google-fonts/poppins";
+  Inter_400Regular,
+  Inter_700Bold,
+} from "@expo-google-fonts/inter";
 import { AppProvider } from "./src/contexts/AppContext";
+import { AuthProvider } from "./src/contexts/AuthContext";
+import { Details } from "./src/screens/Details";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    Poppins_400Regular,
-    Poppins_700Bold
+    Inter_400Regular,
+    Inter_700Bold,
   });
 
   if (!fontsLoaded) {
@@ -27,20 +29,23 @@ export default function App() {
   }
 
   return (
-    <AppProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Movies" component={Movies} />
-          <Stack.Screen name="Series" component={Series} />
-          <Stack.Screen name="Favorites" component={Favorites} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </AppProvider>
+    <AuthProvider>
+      <AppProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Movies" component={Movies} />
+            <Stack.Screen name="Series" component={Series} />
+            <Stack.Screen name="Favorites" component={Favorites} />
+            <Stack.Screen name="Details" component={Details} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </AppProvider>
+    </AuthProvider>
   );
 }

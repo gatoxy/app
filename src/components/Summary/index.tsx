@@ -5,9 +5,20 @@ import { styles } from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
 import { useApp } from "../../contexts/AppContext";
+import { useNavigation } from "@react-navigation/native";
 
 export function Summary() {
   const { modalizeRef, itemSelected } = useApp();
+
+  const navigation = useNavigation();
+
+  const { onCloseSummary } = useApp();
+
+  function navigateToDetails() {
+    navigation.navigate("Details", {
+      itemSelected
+    });
+  }
 
   return (
     <Modalize
@@ -41,7 +52,11 @@ export function Summary() {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.modalButton} activeOpacity={0.60}>
+        <TouchableOpacity
+          style={styles.modalButton}
+          activeOpacity={0.60}
+          onPress={navigateToDetails}
+        >
           <Ionicons name="information-circle-outline" size={24} color={COLORS.WHITE} />
           <Text style={styles.modalButtonText}>Ver mais informações</Text>
         </TouchableOpacity>

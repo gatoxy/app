@@ -8,7 +8,7 @@ interface Props {
   title: string;
   data: Array<TMDBItem>;
   display?: "vertical" | "horizontal";
-  isLoading: boolean;
+  isLoading?: boolean;
   showHowManyPages?: boolean;
   currentPage?: number;
   numberPages?: number;

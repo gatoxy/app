@@ -1,6 +1,8 @@
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { createContext, ReactNode, RefObject, useContext, useRef, useState } from "react";
 import { Modalize } from "react-native-modalize";
 import { IHandles } from "react-native-modalize/lib/options";
+import { db } from "../services/firebase";
 import { tmdb } from "../services/tmdb";
 import { TMDBItem } from "../types";
 
@@ -13,8 +15,10 @@ interface AppContextData {
   getPopular: (media: "movie" | "tv", page: number) => Promise<TMDBResponseProps>;
   search: (media: "movie" | "tv", query: string, page: number) => Promise<TMDBResponseProps>;
   onOpenSummary: (item: TMDBItem) => void;
+  onCloseSummary: () => void;
   modalizeRef: RefObject<IHandles>,
   itemSelected: TMDBItem,
+  addToFavorites: () => void;
 }
 
 interface TMDBResponseProps {
@@ -34,6 +38,10 @@ export function AppProvider({ children }: AppProviderProps) {
   function onOpenSummary(item: TMDBItem) {
     setItemSelected(item);
     modalizeRef.current?.open();
+  }
+
+  function onCloseSummary() {
+    modalizeRef.current?.close();
   }
 
   async function getUpcoming(media: "movie" | "tv") {
@@ -108,9 +116,13 @@ export function AppProvider({ children }: AppProviderProps) {
     }
   }
 
+  async function addToFavorites() {
+
+  }
+
   return (
     <AppContext.Provider value={{
-      getUpcoming, getPopular, onOpenSummary, search, modalizeRef, itemSelected,
+      getUpcoming, getPopular, onOpenSummary, onCloseSummary, search, modalizeRef, itemSelected, addToFavorites,
     }}>
       {children}
     </AppContext.Provider>
