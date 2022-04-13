@@ -36,9 +36,9 @@ export function CardItem({ data, display }: Props) {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.bookmarkButton} activeOpacity={0.70} onPress={addToFavorites}>
+        {/* <TouchableOpacity style={styles.bookmarkButton} activeOpacity={0.70} onPress={addToFavorites}>
           <Feather name="bookmark" size={16} color={COLORS.GRAY} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </TouchableOpacity>
     );
   }

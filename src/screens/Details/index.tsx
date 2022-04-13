@@ -37,10 +37,10 @@ export function Details({ route }: Props) {
         <Text style={styles.year}>{new Date(item.release_date).getFullYear()}</Text>
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.overview}>{item.overview}</Text>
-        <TouchableOpacity style={styles.button} activeOpacity={0.75}>
+        {/* <TouchableOpacity style={styles.button} activeOpacity={0.75}>
           <FontAwesome name="bookmark-o" size={16} color={COLORS.DARK_SECONDARY} />
           <Text style={styles.buttonText}>Adicionar aos favoritos</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </Layout>
   );

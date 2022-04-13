@@ -1,51 +1,65 @@
-import { onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { auth, googleProvider } from "../services/firebase";
+import { GCP_CLIENT_ID, GCP_REDIRECT_URI } from "@env";
+
+import * as AuthSession from "expo-auth-session";
 
 interface AuthContextData {
   signInWithGoogle: () => Promise<void>;
+  user: UserProps | undefined,
 }
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
-type User = {
+type AuthResponse = {
+  type: string;
+  params: {
+    access_token: string;
+  };
+}
+
+type UserProps = {
+  email: string;
+  name: string;
+  picture: string;
   id: string;
-  name: any; // string
-  email: any; // string
-  avatar: any; // string
 }
 
 const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<UserProps | undefined>();
 
   async function signInWithGoogle() {
-    alert("OK");
-  }
+    try {
+      const SCOPE = encodeURI("profile email");
+      const RESPONSE_TYPE = "token";
+      
+      const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GCP_CLIENT_ID}&redirect_uri=${GCP_REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`;
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
-      if (user) {
-        const { uid, displayName, email, photoURL } = user;
+      const { type, params } = await AuthSession.startAsync({ authUrl }) as AuthResponse;
 
+      if(type === "success") {
+        const response = await fetch(`https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${params.access_token}`);
+        const user = await response.json();
+        
         setUser({
-          id: uid,
-          name: displayName,
-          email: email,
-          avatar: photoURL,
+          email: user.email,
+          id: user.id,
+          name: user.given_name,
+          picture: user.picture,
         });
       }
-    });
 
-    return () => unsubscribe();
-  }, []);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <AuthContext.Provider value={{
-      signInWithGoogle,
+      signInWithGoogle, user,
     }}>
       {children}
     </AuthContext.Provider>
