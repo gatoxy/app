@@ -5,7 +5,7 @@ export function Favorites() {
   return (
     <Layout>
       <View>
-        <Text>Favorites</Text>
+        <Text>Testando branchs</Text>
       </View>
     </Layout>
   );
