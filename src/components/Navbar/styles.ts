@@ -4,17 +4,14 @@ import { COLORS, FONTS } from "../../theme";
 export const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 16,
     height: 64,
+    justifyContent: "center",
   },
 
   navbarItem: {
     alignItems: "center",
     justifyContent: "center",
-    height: 54,
-    width: 84,
+    width: 82,
   },
 
   navbarItemText: {

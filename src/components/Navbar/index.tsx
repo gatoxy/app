@@ -1,11 +1,11 @@
 import { Text, TouchableOpacity, View } from "react-native";
-import { styles } from "./styles";
-import { COLORS } from "../../theme";
 import { Fontisto } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { styles } from "./styles";
+import { COLORS } from "../../theme";
 
 export function Navbar() {
   const navigation = useNavigation();

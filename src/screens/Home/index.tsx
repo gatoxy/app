@@ -1,37 +1,35 @@
 import { useEffect, useState } from "react";
-import { CardList } from "../../components/CardList";
+import { Carousel } from "../../components/Carousel";
 import { Layout } from "../../components/Layout";
-import { useApp } from "../../contexts/AppContext";
-import { TMDBItem } from "../../types";
+import { getPopular, getTopRated, getUpcoming } from "../../hooks/useFetch";
+import { Movie } from "../../types";
 
 export function Home() {
-  const { getUpcoming, getPopular } = useApp();
-
-  const [upcomingMovies, setUpcomingMovies] = useState<TMDBItem[]>([]);
-  const [popularMovies, setPopularMovies] = useState<TMDBItem[]>([]);
-  const [popularSeries, setPopularSeries] = useState<TMDBItem[]>([]);
+  const [upcomingMovies, setUpcomingMovies] = useState<Movie[]>([]);
+  const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
+  const [topRatedMovies, setTopRatedMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
-    getUpcoming("movie").then(response => setUpcomingMovies(response.results));
-    getPopular("movie", 1).then(response => setPopularMovies(response.results));
-    getPopular("tv", 1).then(response => setPopularSeries(response.results));
+    getUpcoming().then(response => setUpcomingMovies(response.results));
+    getPopular().then(response => setPopularMovies(response.results));
+    getTopRated().then(response => setTopRatedMovies(response.results));
   }, []);
 
   return (
     <Layout>
-      <CardList
+      <Carousel
         title="Filmes que serão lançados em breve"
         data={upcomingMovies}
       />
 
-      <CardList
-        title="Filmes recomendados para você"
+      <Carousel
+        title="Filmes populares recomendados para você"
         data={popularMovies}
       />
 
-      <CardList
-        title="Séries recomendadas para você"
-        data={popularSeries}
+      <Carousel
+        title="Filmes mais votados"
+        data={topRatedMovies}
       />
     </Layout>
   );

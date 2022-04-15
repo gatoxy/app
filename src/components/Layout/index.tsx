@@ -21,7 +21,7 @@ export function Layout({ children }: Props) {
         {children}
       </ScrollView>
 
-      <Summary />
+      {/* <Summary /> */}
       <Navbar />
     </View>
   );
