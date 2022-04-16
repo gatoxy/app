@@ -1,4 +1,5 @@
-export type Movie = { // Card Movie
+export type Media = {
+  type: string;
   id: number;
   poster_path: string | null;
   backdrop_path: string;

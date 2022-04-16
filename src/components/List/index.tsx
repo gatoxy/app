@@ -1,11 +1,11 @@
-import { ActivityIndicator, FlatList, SafeAreaView, ScrollView, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import { COLORS } from "../../theme";
-import { Movie } from "../../types";
-import { MovieCard } from "./components/MovieCard";
+import { Media } from "../../types";
+import { ListCard } from "./components/ListCard";
 import { styles } from "./styles";
 
 interface Props {
-  data: Array<Movie>;
+  data: Array<Media>;
   title: string;
   loading: boolean;
   currentPage: number;
@@ -23,7 +23,7 @@ export function List({ data, title, loading, currentPage, numberPages }: Props) 
         <FlatList
           horizontal={false}
           data={data}
-          renderItem={({ item }) => <MovieCard key={item.id} data={item} />}
+          renderItem={({ item }) => <ListCard key={item.id} data={item} />}
           keyExtractor={item => item.id.toString()}
           showsHorizontalScrollIndicator={false}
           ItemSeparatorComponent={() => <View style={{

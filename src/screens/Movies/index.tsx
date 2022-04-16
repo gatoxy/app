@@ -3,11 +3,11 @@ import { Layout } from "../../components/Layout";
 import { List } from "../../components/List";
 import { Pagination } from "../../components/Pagination";
 import { Search } from "../../components/Search";
-import { getPopular, searchMovies } from "../../hooks/useFetch";
-import { Movie } from "../../types";
+import { getPopular, search } from "../../hooks/useFetch";
+import { Media } from "../../types";
 
 export function Movies() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<Media[]>([]);
   const [title, setTitle] = useState("Filmes recomendados para você");
   const [searchParam, setSearchParam] = useState("");
   const [numberPages, setNumberPages] = useState(0);
@@ -18,7 +18,7 @@ export function Movies() {
     setLoading(true);
 
     if (query.trim() === "") {
-      getPopular().then(response => {
+      getPopular("movie").then(response => {
         setCurrentPage(response.page);
         setNumberPages(response.total_pages < 500 ? response.total_pages : 500);
         setMovies(response.results);
@@ -30,7 +30,7 @@ export function Movies() {
       return;
     }
 
-    searchMovies(query, 1).then(response => {
+    search("movie", query, 1).then(response => {
       setSearchParam(query);
       setCurrentPage(response.page);
       setNumberPages(response.total_pages < 500 ? response.total_pages : 500);
@@ -44,7 +44,7 @@ export function Movies() {
     setLoading(true);
 
     if (!searchParam) {
-      getPopular(page).then(response => {
+      getPopular("movie", page).then(response => {
         setCurrentPage(response.page);
         setMovies(response.results);
         setLoading(false);
@@ -53,7 +53,7 @@ export function Movies() {
       return;
     }
 
-    searchMovies(searchParam, page).then(response => {
+    search("movie", searchParam, page).then(response => {
       setCurrentPage(response.page);
       setMovies(response.results);
       setLoading(false);
@@ -63,7 +63,7 @@ export function Movies() {
   useEffect(() => {
     setLoading(true);
 
-    getPopular().then(response => {
+    getPopular("movie").then(response => {
       setCurrentPage(response.page);
       setNumberPages(response.total_pages < 500 ? response.total_pages : 500);
       setMovies(response.results);

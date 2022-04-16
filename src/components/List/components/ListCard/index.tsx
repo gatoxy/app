@@ -2,14 +2,14 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { FontAwesome } from "@expo/vector-icons";
 import { COLORS } from "../../../../theme";
-import { Genre, Movie } from "../../../../types";
+import { Genre, Media } from "../../../../types";
 import { useApp } from "../../../../contexts/AppContext";
 
 interface Props {
-  data: Movie;
+  data: Media;
 }
 
-export function MovieCard({ data }: Props) {
+export function ListCard({ data }: Props) {
   const { onOpenSummary, genres } = useApp();
 
   let arrayGenres: Genre[] = [];

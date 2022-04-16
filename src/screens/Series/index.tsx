@@ -3,12 +3,12 @@ import { Layout } from "../../components/Layout";
 import { List } from "../../components/List";
 import { Pagination } from "../../components/Pagination";
 import { Search } from "../../components/Search";
-import { getPopular, searchMovies } from "../../hooks/useFetch";
-import { Movie } from "../../types";
+import { getPopular, search } from "../../hooks/useFetch";
+import { Media } from "../../types";
 
 export function Series() {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [title, setTitle] = useState("Filmes recomendados para você");
+  const [series, setSeries] = useState<Media[]>([]);
+  const [title, setTitle] = useState("Séries recomendadas para você");
   const [searchParam, setSearchParam] = useState("");
   const [numberPages, setNumberPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
@@ -18,11 +18,11 @@ export function Series() {
     setLoading(true);
 
     if (query.trim() === "") {
-      getPopular().then(response => {
+      getPopular("tv").then(response => {
         setCurrentPage(response.page);
         setNumberPages(response.total_pages < 500 ? response.total_pages : 500);
-        setMovies(response.results);
-        setTitle("Filmes recomendados para você");
+        setSeries(response.results);
+        setTitle("Séries recomendados para você");
         setSearchParam("");
         setLoading(false);
       });
@@ -30,11 +30,11 @@ export function Series() {
       return;
     }
 
-    searchMovies(query, 1).then(response => {
+    search("tv", query, 1).then(response => {
       setSearchParam(query);
       setCurrentPage(response.page);
       setNumberPages(response.total_pages < 500 ? response.total_pages : 500);
-      setMovies(response.results);
+      setSeries(response.results);
       setTitle(`${response.total_results} resultados encontrados para "${query}"`);
       setLoading(false);
     });
@@ -44,18 +44,18 @@ export function Series() {
     setLoading(true);
 
     if (!searchParam) {
-      getPopular(page).then(response => {
+      getPopular("tv", page).then(response => {
         setCurrentPage(response.page);
-        setMovies(response.results);
+        setSeries(response.results);
         setLoading(false);
       });
 
       return;
     }
 
-    searchMovies(searchParam, page).then(response => {
+    search("tv", searchParam, page).then(response => {
       setCurrentPage(response.page);
-      setMovies(response.results);
+      setSeries(response.results);
       setLoading(false);
     });
   }
@@ -63,10 +63,10 @@ export function Series() {
   useEffect(() => {
     setLoading(true);
 
-    getPopular().then(response => {
+    getPopular("tv").then(response => {
       setCurrentPage(response.page);
       setNumberPages(response.total_pages < 500 ? response.total_pages : 500);
-      setMovies(response.results);
+      setSeries(response.results);
       setLoading(false);
     });
   }, []);
@@ -74,12 +74,12 @@ export function Series() {
   return (
     <Layout>
       <Search
-        placeholder="Pesquisar por filmes"
+        placeholder="Pesquisar por séries"
         onSearch={onSearch}
       />
 
       <List
-        data={movies}
+        data={series}
         title={title}
         loading={loading}
         currentPage={currentPage}

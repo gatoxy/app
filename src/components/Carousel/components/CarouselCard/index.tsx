@@ -1,10 +1,10 @@
 import { Image, TouchableOpacity } from "react-native";
 import { useApp } from "../../../../contexts/AppContext";
-import { Movie } from "../../../../types";
+import { Media } from "../../../../types";
 import { styles } from "./styles";
 
 interface Props {
-  data: Movie;
+  data: Media;
 }
 
 export function CarouselCard({ data }: Props) {

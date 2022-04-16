@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { Carousel } from "../../components/Carousel";
 import { Layout } from "../../components/Layout";
-import { getPopular, getTopRated, getUpcoming } from "../../hooks/useFetch";
-import { Movie } from "../../types";
+import { getPopular, getUpcoming } from "../../hooks/useFetch";
+import { Media } from "../../types";
 
 export function Home() {
-  const [upcomingMovies, setUpcomingMovies] = useState<Movie[]>([]);
-  const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
-  const [topRatedMovies, setTopRatedMovies] = useState<Movie[]>([]);
+  const [upcomingMovies, setUpcomingMovies] = useState<Media[]>([]);
+  const [popularMovies, setPopularMovies] = useState<Media[]>([]);
+  const [popularSeries, setPopularSeries] = useState<Media[]>([]);
 
   useEffect(() => {
     getUpcoming().then(response => setUpcomingMovies(response.results));
-    getPopular().then(response => setPopularMovies(response.results));
-    getTopRated().then(response => setTopRatedMovies(response.results));
+    getPopular("movie").then(response => setPopularMovies(response.results));
+    getPopular("tv").then(response => setPopularSeries(response.results));
   }, []);
 
   return (
@@ -23,13 +23,13 @@ export function Home() {
       />
 
       <Carousel
-        title="Filmes populares recomendados para você"
+        title="Filmes recomendados para você"
         data={popularMovies}
       />
 
       <Carousel
-        title="Filmes mais votados"
-        data={topRatedMovies}
+        title="Séries recomendados para você"
+        data={popularSeries}
       />
     </Layout>
   );
