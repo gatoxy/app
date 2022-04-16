@@ -1,28 +1,24 @@
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
-import { CardList } from "../../components/CardList";
 import { Layout } from "../../components/Layout";
+import { List } from "../../components/List";
 import { Pagination } from "../../components/Pagination";
 import { Search } from "../../components/Search";
-import { useApp } from "../../contexts/AppContext";
-import { TMDBItem } from "../../types";
+import { getPopular, searchMovies } from "../../hooks/useFetch";
+import { Movie } from "../../types";
 
 export function Movies() {
-  const { getPopular, search } = useApp();
-
-  const [movies, setMovies] = useState<TMDBItem[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [title, setTitle] = useState("Filmes recomendados para você");
   const [searchParam, setSearchParam] = useState("");
   const [numberPages, setNumberPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   function onSearch(query: string) {
     setLoading(true);
 
     if (query.trim() === "") {
-      getPopular("movie", 1).then(response => {
+      getPopular().then(response => {
         setCurrentPage(response.page);
         setNumberPages(response.total_pages < 500 ? response.total_pages : 500);
         setMovies(response.results);
@@ -34,7 +30,7 @@ export function Movies() {
       return;
     }
 
-    search("movie", query, 1).then(response => {
+    searchMovies(query, 1).then(response => {
       setSearchParam(query);
       setCurrentPage(response.page);
       setNumberPages(response.total_pages < 500 ? response.total_pages : 500);
@@ -48,7 +44,7 @@ export function Movies() {
     setLoading(true);
 
     if (!searchParam) {
-      getPopular("movie", page).then(response => {
+      getPopular(page).then(response => {
         setCurrentPage(response.page);
         setMovies(response.results);
         setLoading(false);
@@ -57,7 +53,7 @@ export function Movies() {
       return;
     }
 
-    search("movie", searchParam, page).then(response => {
+    searchMovies(searchParam, page).then(response => {
       setCurrentPage(response.page);
       setMovies(response.results);
       setLoading(false);
@@ -67,7 +63,7 @@ export function Movies() {
   useEffect(() => {
     setLoading(true);
 
-    getPopular("movie", 1).then(response => {
+    getPopular().then(response => {
       setCurrentPage(response.page);
       setNumberPages(response.total_pages < 500 ? response.total_pages : 500);
       setMovies(response.results);
@@ -78,16 +74,14 @@ export function Movies() {
   return (
     <Layout>
       <Search
-        placeholder="Buscar por filmes"
+        placeholder="Pesquisar por filmes"
         onSearch={onSearch}
       />
 
-      <CardList
-        title={title}
+      <List
         data={movies}
-        display="vertical"
-        isLoading={loading}
-        showHowManyPages={true}
+        title={title}
+        loading={loading}
         currentPage={currentPage}
         numberPages={numberPages}
       />

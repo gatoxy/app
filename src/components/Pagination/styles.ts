@@ -3,14 +3,15 @@ import { COLORS, FONTS } from "../../theme";
 
 export const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
-    marginVertical: 16,
-  },
-
-  title: {
-    fontFamily: FONTS.BOLD,
-    color: COLORS.WHITE,
-    fontSize: 14,
+    flexDirection: "row",
+    justifyContent: "center",
     marginBottom: 16,
+  },
+  
+  points: {
+    fontFamily: FONTS.BOLD,
+    fontSize: 12,
+    color: COLORS.WHITE,
+    alignSelf: "flex-end",
   },
 });

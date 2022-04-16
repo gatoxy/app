@@ -8,17 +8,21 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  navbarItem: {
+  navbar_item: {
     alignItems: "center",
     justifyContent: "center",
     width: 82,
   },
 
-  navbarItemText: {
+  navbar_item_text: {
     marginTop: 4,
     alignItems: "center",
     color: COLORS.GRAY,
     fontSize: 12,
     fontFamily: FONTS.REGULAR,
+  },
+  
+  selected: {
+    color: COLORS.PURPLE,
   },
 });

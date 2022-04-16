@@ -6,4 +6,10 @@ export type Movie = { // Card Movie
   title: string;
   release_date: string;
   vote_average: number;
+  genre_ids: Array<number>;
+}
+
+export type Genre = {
+  id: number;
+  name: string;
 }

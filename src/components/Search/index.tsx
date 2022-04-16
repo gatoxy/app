@@ -1,6 +1,5 @@
-import { TouchableOpacity, View } from "react-native";
-import { TextInput } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { TouchableOpacity, View, TextInput } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 import { styles } from "./styles";
 import { COLORS } from "../../theme";
 import { useState } from "react";
@@ -19,16 +18,16 @@ export function Search({ placeholder, onSearch }: Props) {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.button} activeOpacity={0.75} onPress={onSubmit}>
+        <FontAwesome name="search" size={18} color={COLORS.GRAY} />
+      </TouchableOpacity>
+
       <TextInput
-        style={styles.inputContainer}
+        style={styles.input}
         placeholder={placeholder}
-        placeholderTextColor={COLORS.GRAY}
+        placeholderTextColor={COLORS.WHITE}
         onChangeText={text => setSearchInput(text)}
       />
-
-      <TouchableOpacity style={styles.submitButton} activeOpacity={0.85} onPress={onSubmit}>
-        <FontAwesome5 name="search" size={18} color={COLORS.WHITE} />
-      </TouchableOpacity>
     </View>
   );
 }

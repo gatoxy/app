@@ -1,31 +1,28 @@
 import { useEffect, useState } from "react";
-import { CardList } from "../../components/CardList";
 import { Layout } from "../../components/Layout";
+import { List } from "../../components/List";
 import { Pagination } from "../../components/Pagination";
 import { Search } from "../../components/Search";
-import { useApp } from "../../contexts/AppContext";
-import { TMDBItem } from "../../types";
+import { getPopular, searchMovies } from "../../hooks/useFetch";
+import { Movie } from "../../types";
 
 export function Series() {
-  const { getPopular, search } = useApp();
-
-  const [series, setSeries] = useState<TMDBItem[]>([]);
-  const [title, setTitle] = useState("Séries recomendados para você");
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [title, setTitle] = useState("Filmes recomendados para você");
   const [searchParam, setSearchParam] = useState("");
   const [numberPages, setNumberPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   function onSearch(query: string) {
     setLoading(true);
 
     if (query.trim() === "") {
-      getPopular("tv", 1).then(response => {
+      getPopular().then(response => {
         setCurrentPage(response.page);
         setNumberPages(response.total_pages < 500 ? response.total_pages : 500);
-        setSeries(response.results);
-        setTitle("Séries recomendados para você");
+        setMovies(response.results);
+        setTitle("Filmes recomendados para você");
         setSearchParam("");
         setLoading(false);
       });
@@ -33,11 +30,11 @@ export function Series() {
       return;
     }
 
-    search("tv", query, 1).then(response => {
+    searchMovies(query, 1).then(response => {
       setSearchParam(query);
       setCurrentPage(response.page);
       setNumberPages(response.total_pages < 500 ? response.total_pages : 500);
-      setSeries(response.results);
+      setMovies(response.results);
       setTitle(`${response.total_results} resultados encontrados para "${query}"`);
       setLoading(false);
     });
@@ -47,18 +44,18 @@ export function Series() {
     setLoading(true);
 
     if (!searchParam) {
-      getPopular("tv", page).then(response => {
+      getPopular(page).then(response => {
         setCurrentPage(response.page);
-        setSeries(response.results);
+        setMovies(response.results);
         setLoading(false);
       });
 
       return;
     }
 
-    search("tv", searchParam, page).then(response => {
+    searchMovies(searchParam, page).then(response => {
       setCurrentPage(response.page);
-      setSeries(response.results);
+      setMovies(response.results);
       setLoading(false);
     });
   }
@@ -66,10 +63,10 @@ export function Series() {
   useEffect(() => {
     setLoading(true);
 
-    getPopular("tv", 1).then(response => {
+    getPopular().then(response => {
       setCurrentPage(response.page);
       setNumberPages(response.total_pages < 500 ? response.total_pages : 500);
-      setSeries(response.results);
+      setMovies(response.results);
       setLoading(false);
     });
   }, []);
@@ -77,16 +74,14 @@ export function Series() {
   return (
     <Layout>
       <Search
-        placeholder="Buscar por séries"
+        placeholder="Pesquisar por filmes"
         onSearch={onSearch}
       />
 
-      <CardList
+      <List
+        data={movies}
         title={title}
-        data={series}
-        display="vertical"
-        isLoading={loading}
-        showHowManyPages={true}
+        loading={loading}
         currentPage={currentPage}
         numberPages={numberPages}
       />

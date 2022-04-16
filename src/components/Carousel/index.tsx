@@ -20,7 +20,7 @@ export function Carousel({ title, data }: Props) {
         keyExtractor={item => item.id.toString()}
         showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={() => <View style={{
-          marginHorizontal: 4,
+          marginHorizontal: 6,
         }} />}
       />
     </View>

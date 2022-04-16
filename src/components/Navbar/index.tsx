@@ -12,24 +12,24 @@ export function Navbar() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.navbarItem} activeOpacity={0.50} onPress={() => navigation.navigate("Home")}>
+      <TouchableOpacity style={styles.navbar_item} activeOpacity={0.75} onPress={() => navigation.navigate("Home")}>
         <Fontisto name="home" size={18} color={COLORS.GRAY} />
-        <Text style={styles.navbarItemText}>Início</Text>
+        <Text style={styles.navbar_item_text}>Início</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.navbarItem} activeOpacity={0.50} onPress={() => navigation.navigate("Movies")}>
+      <TouchableOpacity style={styles.navbar_item} activeOpacity={0.75} onPress={() => navigation.navigate("Movies")}>
         <MaterialCommunityIcons name="filmstrip" size={18} color={COLORS.GRAY} />
-        <Text style={styles.navbarItemText}>Filmes</Text>
+        <Text style={styles.navbar_item_text}>Filmes</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.navbarItem} activeOpacity={0.50} onPress={() => navigation.navigate("Series")}>
+      <TouchableOpacity style={styles.navbar_item} activeOpacity={0.75} onPress={() => navigation.navigate("Series")}>
         <Ionicons name="tv" size={18} color={COLORS.GRAY} />
-        <Text style={styles.navbarItemText}>Séries</Text>
+        <Text style={styles.navbar_item_text}>Séries</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.navbarItem} activeOpacity={0.50} onPress={() => navigation.navigate("Favorites")}>
+      <TouchableOpacity style={styles.navbar_item} activeOpacity={0.75} onPress={() => navigation.navigate("Favorites")}>
         <FontAwesome name="bookmark" size={18} color={COLORS.GRAY} />
-        <Text style={styles.navbarItemText}>Favoritos</Text>
+        <Text style={styles.navbar_item_text}>Favoritos</Text>
       </TouchableOpacity>
     </View>
   );

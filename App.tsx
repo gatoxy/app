@@ -4,23 +4,25 @@ import { Home } from "./src/screens/Home";
 import { Movies } from "./src/screens/Movies";
 import { Series } from "./src/screens/Series";
 import { Favorites } from "./src/screens/Favorites";
+import { Details } from "./src/screens/Details";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AppProvider } from "./src/contexts/AppContext";
-import { Details } from "./src/screens/Details";
 
 import {
   useFonts,
-  Inter_400Regular,
-  Inter_700Bold,
-} from "@expo-google-fonts/inter";
+  Roboto_400Regular,
+  Roboto_500Medium,
+  Roboto_700Bold,
+} from "@expo-google-fonts/roboto";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    Inter_400Regular,
-    Inter_700Bold,
+    Roboto_400Regular,
+    Roboto_500Medium,
+    Roboto_700Bold,
   });
 
   if (!fontsLoaded) {

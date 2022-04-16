@@ -1,24 +1,27 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../theme";
+import { COLORS, FONTS } from "../../theme";
 
 export const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 16,
-    marginTop: 16,
     backgroundColor: COLORS.DARK_SECONDARY,
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 8,
-    paddingHorizontal: 14,
-    borderRadius: 4,
+    marginHorizontal: 16,
+    paddingHorizontal: 18,
+    paddingVertical: 14,
+    borderRadius: 16,
+    marginBottom: 16,
   },
 
-  inputContainer: {
+  input: {
     flex: 1,
+    fontFamily: FONTS.REGULAR,
+    fontSize: 12,
     color: COLORS.WHITE,
-    fontSize: 14,
   },
 
-  submitButton: {
+  button: {
+    marginRight: 16,
   },
 });

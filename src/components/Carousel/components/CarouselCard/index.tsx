@@ -1,4 +1,5 @@
 import { Image, TouchableOpacity } from "react-native";
+import { useApp } from "../../../../contexts/AppContext";
 import { Movie } from "../../../../types";
 import { styles } from "./styles";
 
@@ -7,8 +8,14 @@ interface Props {
 }
 
 export function CarouselCard({ data }: Props) {
+  const { onOpenSummary } = useApp();
+
   return (
-    <TouchableOpacity style={styles.container} activeOpacity={0.75}>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.75}
+      onPress={() => onOpenSummary(data)}
+    >
       <Image
         style={styles.image}
         source={{

@@ -15,13 +15,13 @@ export function Layout({ children }: Props) {
     <View style={styles.container}>
       <StatusBar style="light" />
 
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Header />
 
         {children}
       </ScrollView>
 
-      {/* <Summary /> */}
+      <Summary />
       <Navbar />
     </View>
   );

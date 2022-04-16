@@ -1,4 +1,5 @@
 export const FONTS = {
-  REGULAR: "Inter_400Regular",
-  BOLD: "Inter_700Bold",
+  REGULAR: "Roboto_400Regular",
+  MEDIUM: "Roboto_500Medium",
+  BOLD: "Roboto_700Bold",
 };

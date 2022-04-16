@@ -6,7 +6,8 @@ export const styles = StyleSheet.create({
   },
 
   image: {
-    width: 95,
+    width: 110,
     height: 160,
+    borderRadius: 12,
   },
 });
