@@ -48,15 +48,11 @@ export function ListCard({ data }: Props) {
           </View>
         </View>
 
-        <ScrollView
-          style={styles.genres}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-        >
-          {arrayGenres.map(genre => (
-            <Text style={styles.genre_name} key={genre.id}>{genre.name}</Text>
-          ))}
-        </ScrollView>
+        <View style={styles.genres}>
+          {arrayGenres.map((genre, index) =>
+            index < 2 && <Text style={styles.genre_name} key={genre.id} numberOfLines={1} ellipsizeMode="tail">{genre.name}</Text>
+          )}
+        </View>
       </View>
     </View>
   );

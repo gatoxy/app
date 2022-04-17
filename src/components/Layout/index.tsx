@@ -8,15 +8,16 @@ import { styles } from "./styles";
 
 interface Props {
   children: ReactNode;
+  hidden?: boolean;
 }
 
-export function Layout({ children }: Props) {
+export function Layout({ children, hidden = false }: Props) {
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Header />
+        {!hidden && <Header />}
 
         {children}
       </ScrollView>

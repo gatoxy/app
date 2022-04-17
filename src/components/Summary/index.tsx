@@ -6,9 +6,12 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
 import { FontAwesome } from "@expo/vector-icons";
 import { Genre } from "../../types";
+import { useNavigation } from "@react-navigation/native";
 
 export function Summary() {
   const { modalizeRef, summaryMovie, genres } = useApp();
+
+  const navigation = useNavigation();
 
   let arrayGenres: Genre[] = [];
 
@@ -19,6 +22,13 @@ export function Summary() {
       arrayGenres.push(find);
     }
   });
+
+  function navigateToDetails() {
+    navigation.navigate("Details", {
+      id: summaryMovie.id,
+      type: summaryMovie.type,
+    })
+  }
 
   return (
     <Modalize ref={modalizeRef} snapPoint={218} modalStyle={styles.modal}>
@@ -57,7 +67,7 @@ export function Summary() {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.button} activeOpacity={0.75}>
+        <TouchableOpacity style={styles.button} activeOpacity={0.75} onPress={navigateToDetails}>
           <Ionicons name="information-circle-outline" size={20} color={COLORS.WHITE} />
           <Text style={styles.button_text}>Ver mais informações</Text>
         </TouchableOpacity>

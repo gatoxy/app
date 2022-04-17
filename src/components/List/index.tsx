@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import { ActivityIndicator, FlatList, ScrollView, Text, View } from "react-native";
 import { COLORS } from "../../theme";
 import { Media } from "../../types";
 import { ListCard } from "./components/ListCard";
@@ -20,16 +20,25 @@ export function List({ data, title, loading, currentPage, numberPages }: Props) 
       {loading ? (
         <ActivityIndicator size="small" color={COLORS.DARK_SECONDARY} />
       ) : (
-        <FlatList
-          horizontal={false}
-          data={data}
-          renderItem={({ item }) => <ListCard key={item.id} data={item} />}
-          keyExtractor={item => item.id.toString()}
-          showsHorizontalScrollIndicator={false}
-          ItemSeparatorComponent={() => <View style={{
-            marginVertical: 8,
-          }} />}
-        />
+        <ScrollView
+          horizontal={true}
+          contentContainerStyle={{
+            flexGrow: 1,
+            justifyContent: "center",
+            width: "100%"
+          }}
+        >
+          <FlatList
+            horizontal={false}
+            data={data}
+            renderItem={({ item }) => <ListCard key={item.id} data={item} />}
+            keyExtractor={item => item.id.toString()}
+            showsHorizontalScrollIndicator={false}
+            ItemSeparatorComponent={() => <View style={{
+              marginVertical: 8,
+            }} />}
+          />
+        </ScrollView>
       )}
     </View>
   );
