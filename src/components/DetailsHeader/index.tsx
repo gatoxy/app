@@ -1,10 +1,9 @@
-import { Image, ScrollView, Text, View } from "react-native";
-import { COLORS } from "../../theme";
+import { Image, Text, View } from "react-native";
 import { styles } from "./styles";
-import { FontAwesome } from "@expo/vector-icons";
 import { DetailsType } from "../../types";
 import { MediaIcon } from "../MediaIcon";
 import { Average } from "../Average";
+import { Genres } from "../Genres";
 
 interface Props {
   data: DetailsType;
@@ -32,20 +31,10 @@ export function DetailsHeader({ data }: Props) {
           <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{data.title}</Text>
           <View style={styles.row}>
             <Text style={styles.year}>{new Date(data.release_date).getFullYear()}</Text>
-
             <Average vote_average={data.vote_average} />
           </View>
 
-          <View style={styles.genres}>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              {data.genres.map(genre => (
-                <Text style={styles.genre_name} key={genre.id}>{genre.name}</Text>
-              ))}
-            </ScrollView>
-          </View>
+          <Genres data={data.genres} />
 
           <View style={styles.row}>
             <Text style={styles.duration}>

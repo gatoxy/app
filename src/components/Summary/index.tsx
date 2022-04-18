@@ -1,4 +1,4 @@
-import { Image, Text, View, TouchableOpacity, ScrollView } from "react-native";
+import { Image, Text, View, TouchableOpacity } from "react-native";
 import { Modalize } from "react-native-modalize";
 import { useApp } from "../../contexts/AppContext";
 import { styles } from "./styles";
@@ -8,6 +8,7 @@ import { GenreType } from "../../types";
 import { useNavigation } from "@react-navigation/native";
 import { MediaIcon } from "../MediaIcon";
 import { Average } from "../Average";
+import { Genres } from "../Genres";
 
 export function Summary() {
   const { modalizeRef, summaryMovie, genres, onCloseSummary } = useApp();
@@ -48,22 +49,11 @@ export function Summary() {
             <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{summaryMovie.title}</Text>
             <View style={styles.row}>
               <Text style={styles.year}>{new Date(summaryMovie.release_date).getFullYear()}</Text>
-
               <Average vote_average={summaryMovie.vote_average} />
-
               <MediaIcon type={summaryMovie.type} />
             </View>
 
-            <View style={styles.genres}>
-              <ScrollView
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-              >
-                {arrayGenres.map(genre => (
-                  <Text style={styles.genre_name} key={genre.id}>{genre.name}</Text>
-                ))}
-              </ScrollView>
-            </View>
+            <Genres data={arrayGenres} />
 
             <Text style={styles.description} numberOfLines={4} ellipsizeMode="tail">{summaryMovie.overview}</Text>
           </View>

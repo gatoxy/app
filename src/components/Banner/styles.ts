@@ -16,20 +16,7 @@ export const styles = StyleSheet.create({
     color: COLORS.WHITE,
     fontSize: 12,
     textAlign: "center",
-    marginVertical: 8,
-  },
-
-  genres: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginBottom: 8,
-  },
-
-  genre_name: {
-    fontFamily: FONTS.REGULAR,
-    color: COLORS.GRAY,
-    fontSize: 12,
-    marginHorizontal: 6,
+    marginTop: 8,
   },
 
   row: {

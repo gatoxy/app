@@ -5,6 +5,7 @@ import { useApp } from "../../contexts/AppContext";
 import { useNavigation } from "@react-navigation/native";
 import { MediaIcon } from "../MediaIcon";
 import { Average } from "../Average";
+import { Genres } from "../Genres";
 
 interface Props {
   data: DetailsType;
@@ -35,11 +36,7 @@ export function Banner({ data }: Props) {
 
       <Text style={styles.title}>{data.title}</Text>
 
-      <View style={styles.genres}>
-        {data.genres?.map((genre, index) => (
-          <Text style={styles.genre_name} key={genre.id}>{genre.name}</Text>
-        ))}
-      </View>
+      <Genres data={data.genres} textAlign="center" />
 
       <View style={styles.row}>
         <Text style={styles.year}>{new Date(data.release_date).getFullYear()}</Text>

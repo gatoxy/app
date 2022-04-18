@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import { styles } from "./styles";
-
-import YoutubePlayer from "react-native-youtube-iframe";
 import { VideoType } from "../../types";
 import { getVideos } from "../../hooks/useFetch";
 import { Loading } from "../Loading";
+
+import YoutubePlayer from "react-native-youtube-iframe";
 
 interface Props {
   type: string;

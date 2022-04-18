@@ -4,6 +4,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { COLORS } from "../../../../theme";
 import { GenreType, MediaType } from "../../../../types";
 import { useApp } from "../../../../contexts/AppContext";
+import { Genres } from "../../../Genres";
 
 interface Props {
   data: MediaType;
@@ -48,11 +49,7 @@ export function ListCard({ data }: Props) {
           </View>
         </View>
 
-        <View style={styles.genres}>
-          {arrayGenres.map((genre, index) =>
-            index < 2 && <Text style={styles.genre_name} key={genre.id} numberOfLines={1} ellipsizeMode="tail">{genre.name}</Text>
-          )}
-        </View>
+        <Genres data={arrayGenres} limit={2} />
       </View>
     </View>
   );

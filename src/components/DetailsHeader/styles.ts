@@ -42,25 +42,12 @@ export const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 6,
   },
 
   year: {
     fontFamily: FONTS.REGULAR,
     color: COLORS.WHITE,
     fontSize: 12,
-  },
-
-  genres: {
-    flexDirection: "row",
-    marginBottom: 8,
-  },
-
-  genre_name: {
-    fontFamily: FONTS.REGULAR,
-    color: COLORS.GRAY,
-    fontSize: 12,
-    marginRight: 12,
   },
 
   duration: {
