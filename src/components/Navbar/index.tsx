@@ -1,36 +1,27 @@
-import { Text, TouchableOpacity, View } from "react-native";
-import { Fontisto } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { View } from "react-native";
 import { styles } from "./styles";
+import { NavbarItem } from "./components/NavbarItem";
+import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
 
 export function Navbar() {
-  const navigation = useNavigation();
-
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.navbar_item} activeOpacity={0.75} onPress={() => navigation.navigate("Home")}>
-        <Fontisto name="home" size={18} color={COLORS.GRAY} />
-        <Text style={styles.navbar_item_text}>Início</Text>
-      </TouchableOpacity>
+      <NavbarItem navigateTo="Home" text="Início">
+        <Ionicons name="ios-home-outline" size={18} color={COLORS.WHITE} />
+      </NavbarItem>
 
-      <TouchableOpacity style={styles.navbar_item} activeOpacity={0.75} onPress={() => navigation.navigate("Movies")}>
-        <MaterialCommunityIcons name="filmstrip" size={18} color={COLORS.GRAY} />
-        <Text style={styles.navbar_item_text}>Filmes</Text>
-      </TouchableOpacity>
+      <NavbarItem navigateTo="Movies" text="Filmes">
+        <Ionicons name="film-outline" size={18} color={COLORS.WHITE} />
+      </NavbarItem>
 
-      <TouchableOpacity style={styles.navbar_item} activeOpacity={0.75} onPress={() => navigation.navigate("Series")}>
-        <Ionicons name="tv" size={18} color={COLORS.GRAY} />
-        <Text style={styles.navbar_item_text}>Séries</Text>
-      </TouchableOpacity>
+      <NavbarItem navigateTo="Series" text="Séries">
+        <Ionicons name="ios-tv-outline" size={18} color={COLORS.WHITE} />
+      </NavbarItem>
 
-      <TouchableOpacity style={styles.navbar_item} activeOpacity={0.75} onPress={() => navigation.navigate("Favorites")}>
-        <FontAwesome name="bookmark" size={18} color={COLORS.GRAY} />
-        <Text style={styles.navbar_item_text}>Favoritos</Text>
-      </TouchableOpacity>
+      <NavbarItem navigateTo="Favorites" text="Lista">
+        <Ionicons name="list" size={18} color={COLORS.WHITE} />
+      </NavbarItem>
     </View>
   );
 }

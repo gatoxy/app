@@ -16,7 +16,15 @@ import {
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  Home: undefined;
+  Movies: undefined;
+  Series: undefined;
+  Details: { id: number, type: string };
+  Favorites: undefined;
+}
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   const [fontsLoaded] = useFonts({

@@ -4,7 +4,6 @@ import { useApp } from "../../contexts/AppContext";
 import { styles } from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
-import { FontAwesome } from "@expo/vector-icons";
 import { GenreType } from "../../types";
 import { useNavigation } from "@react-navigation/native";
 import { MediaIcon } from "../MediaIcon";
