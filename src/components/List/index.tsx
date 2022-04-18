@@ -1,11 +1,11 @@
 import { ActivityIndicator, FlatList, ScrollView, Text, View } from "react-native";
 import { COLORS } from "../../theme";
-import { Media } from "../../types";
+import { MediaType } from "../../types";
 import { ListCard } from "./components/ListCard";
 import { styles } from "./styles";
 
 interface Props {
-  data: Array<Media>;
+  data: Array<MediaType>;
   title: string;
   loading: boolean;
   currentPage: number;

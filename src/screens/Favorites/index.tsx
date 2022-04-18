@@ -3,7 +3,7 @@ import { Layout } from "../../components/Layout";
 
 export function Favorites() {
   return (
-    <Layout>
+    <Layout showHeader={true}>
       <View>
         <Text>Favoritos</Text>
       </View>

@@ -1,11 +1,11 @@
 import { FlatList, Text, View } from "react-native";
-import { Media } from "../../types";
+import { MediaType } from "../../types";
 import { CarouselCard } from "./components/CarouselCard";
 import { styles } from "./styles";
 
 interface Props {
   title: string;
-  data: Array<Media>;
+  data: Array<MediaType>;
   small?: boolean;
 }
 

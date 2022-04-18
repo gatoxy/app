@@ -1,5 +1,5 @@
 import { tmdb } from "../services/tmdb";
-import { Genre } from "../types";
+import { GenreType } from "../types";
 
 interface ResponseMediaTMDB {
   page: number;
@@ -21,7 +21,7 @@ interface ResponseMediaTMDB {
 }
 
 interface ResponseGenreListTMDB {
-  genres: Array<Genre>;
+  genres: Array<GenreType>;
 }
 
 interface ResponseVideoListTMDB {

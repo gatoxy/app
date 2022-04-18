@@ -30,7 +30,7 @@ export function Video({ type, id }: Props) {
       setVideos(response);
       setLoading(false);
     });
-  }, []);
+  }, [id]);
 
   return (
     <View style={styles.container}>

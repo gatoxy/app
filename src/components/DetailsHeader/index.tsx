@@ -1,9 +1,10 @@
 import { Image, ScrollView, Text, View } from "react-native";
 import { COLORS } from "../../theme";
 import { styles } from "./styles";
-import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { DetailsType } from "../../types";
+import { MediaIcon } from "../MediaIcon";
+import { Average } from "../Average";
 
 interface Props {
   data: DetailsType;
@@ -32,10 +33,7 @@ export function DetailsHeader({ data }: Props) {
           <View style={styles.row}>
             <Text style={styles.year}>{new Date(data.release_date).getFullYear()}</Text>
 
-            <View style={styles.average}>
-              <FontAwesome name="star" size={10} color={COLORS.YELLOW} />
-              <Text style={styles.average_text}>{data.vote_average}</Text>
-            </View>
+            <Average vote_average={data.vote_average} />
           </View>
 
           <View style={styles.genres}>
@@ -56,17 +54,7 @@ export function DetailsHeader({ data }: Props) {
                 `${data.duration} ${data.duration < 2 ? "temporada" : "temporadas"}`}
             </Text>
 
-            {data.type === "movie" ? (
-              <View style={styles.media}>
-                <Ionicons name="film-outline" size={10} color={COLORS.WHITE} />
-                <Text style={styles.media_text}>Filme</Text>
-              </View>
-            ) : (
-              <View style={styles.media}>
-                <Ionicons name="ios-tv-outline" size={10} color={COLORS.WHITE} />
-                <Text style={styles.media_text}>Série</Text>
-              </View>
-            )}
+            <MediaIcon type={data.type} />
           </View>
         </View>
       </View>

@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import { Layout } from "../../components/Layout";
 import { getDetails, getRecommendations } from "../../hooks/useFetch";
-import { COLORS } from "../../theme";
 import { MediaType, DetailsType } from "../../types";
 import { styles } from "./styles";
-
-import { useNavigation } from "@react-navigation/native";
 import { Carousel } from "../../components/Carousel";
-
-
 import { DetailsHeader } from "../../components/DetailsHeader";
 import { Cast } from "../../components/Cast";
 import { Video } from "../../components/Video";
-import { BackButton } from "../../components/BackButton";
+import { Loading } from "../../components/Loading";
 
 interface Props {
   route: {
@@ -27,8 +22,6 @@ interface Props {
 export function Details({ route }: Props) {
   const { id, type } = route.params;
 
-  const navigation = useNavigation();
-
   const [details, setDetails] = useState<DetailsType>({} as DetailsType);
   const [recommendations, setRecommendations] = useState<MediaType[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,14 +33,17 @@ export function Details({ route }: Props) {
       setDetails(response);
       setLoading(false);
     });
+
+    getRecommendations(type, id).then(response => {
+      setRecommendations(response.results);
+    });
   }, [id]);
 
   return (
-    <Layout hidden={true}>
-      <BackButton />
-      <DetailsHeader data={details} />
+    <Layout showHeader={true}>
+      {loading ? <Loading /> : <DetailsHeader data={details} />}
       <Cast type={type} id={id} />
-      <Overview overview={details.overview} />
+      {loading ? <Loading /> : <Overview overview={details.overview} />}
       <Video type={type} id={id} />
       <Carousel
         title="Filmes similares"

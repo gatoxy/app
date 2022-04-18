@@ -4,10 +4,10 @@ import { List } from "../../components/List";
 import { Pagination } from "../../components/Pagination";
 import { Search } from "../../components/Search";
 import { getPopular, search } from "../../hooks/useFetch";
-import { Media } from "../../types";
+import { MediaType } from "../../types";
 
 export function Movies() {
-  const [movies, setMovies] = useState<Media[]>([]);
+  const [movies, setMovies] = useState<MediaType[]>([]);
   const [title, setTitle] = useState("Filmes recomendados para você");
   const [searchParam, setSearchParam] = useState("");
   const [numberPages, setNumberPages] = useState(0);
@@ -72,7 +72,7 @@ export function Movies() {
   }, []);
 
   return (
-    <Layout>
+    <Layout showHeader={true}>
       <Search
         placeholder="Pesquisar por filmes"
         onSearch={onSearch}

@@ -1,10 +1,10 @@
 import { Image, TouchableOpacity } from "react-native";
 import { useApp } from "../../../../contexts/AppContext";
-import { Media } from "../../../../types";
+import { MediaType } from "../../../../types";
 import { styles } from "./styles";
 
 interface Props {
-  data: Media;
+  data: MediaType;
   small?: boolean;
 }
 

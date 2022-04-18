@@ -21,7 +21,7 @@ export function Cast({ type, id }: Props) {
       setCast(response);
       setLoading(false);
     });
-  }, []);
+  }, [id]);
 
   return (
     <View style={styles.container}>

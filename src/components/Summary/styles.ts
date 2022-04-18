@@ -47,32 +47,6 @@ export const styles = StyleSheet.create({
     fontFamily: FONTS.REGULAR,
     color: COLORS.WHITE,
     fontSize: 12,
-    marginRight: 12,
-  },
-
-  average: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginRight: 12,
-  },
-
-  average_text: {
-    marginLeft: 6,
-    fontFamily: FONTS.REGULAR,
-    color: COLORS.WHITE,
-    fontSize: 12,
-  },
-
-  media: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
-  media_text: {
-    marginLeft: 6,
-    fontFamily: FONTS.REGULAR,
-    color: COLORS.WHITE,
-    fontSize: 12,
   },
 
   genres: {

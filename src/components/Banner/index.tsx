@@ -1,14 +1,13 @@
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { MediaDetails } from "../../types";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { DetailsType } from "../../types";
 import { styles } from "./styles";
-import { FontAwesome } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { COLORS } from "../../theme";
 import { useApp } from "../../contexts/AppContext";
 import { useNavigation } from "@react-navigation/native";
+import { MediaIcon } from "../MediaIcon";
+import { Average } from "../Average";
 
 interface Props {
-  data: MediaDetails;
+  data: DetailsType;
 }
 
 export function Banner({ data }: Props) {
@@ -45,19 +44,9 @@ export function Banner({ data }: Props) {
       <View style={styles.row}>
         <Text style={styles.year}>{new Date(data.release_date).getFullYear()}</Text>
 
-        {/* <TouchableOpacity activeOpacity={0.75} style={styles.button}>
-          <Text style={styles.button_text}>Mais informações</Text>
-        </TouchableOpacity> */}
+        <Average vote_average={data.vote_average} />
 
-        <View style={styles.average}>
-          <FontAwesome name="star" size={10} color={COLORS.YELLOW} />
-          <Text style={styles.average_text}>{data.vote_average}</Text>
-        </View>
-
-        <View style={styles.media}>
-          <Ionicons name="film-outline" size={10} color={COLORS.WHITE} />
-          <Text style={styles.media_text}>Filme</Text>
-        </View>
+        <MediaIcon type={data.type} />
       </View>
     </View>
   );

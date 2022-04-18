@@ -5,15 +5,17 @@ import { styles } from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
 import { FontAwesome } from "@expo/vector-icons";
-import { Genre } from "../../types";
+import { GenreType } from "../../types";
 import { useNavigation } from "@react-navigation/native";
+import { MediaIcon } from "../MediaIcon";
+import { Average } from "../Average";
 
 export function Summary() {
   const { modalizeRef, summaryMovie, genres, onCloseSummary } = useApp();
 
   const navigation = useNavigation();
 
-  let arrayGenres: Genre[] = [];
+  let arrayGenres: GenreType[] = [];
 
   summaryMovie.genre_ids?.map(genreId => {
     const find = genres.find(genre => genre.id === genreId);
@@ -48,22 +50,9 @@ export function Summary() {
             <View style={styles.row}>
               <Text style={styles.year}>{new Date(summaryMovie.release_date).getFullYear()}</Text>
 
-              <View style={styles.average}>
-                <FontAwesome name="star" size={10} color={COLORS.YELLOW} />
-                <Text style={styles.average_text}>{summaryMovie.vote_average}</Text>
-              </View>
+              <Average vote_average={summaryMovie.vote_average} />
 
-              {summaryMovie.type === "movie" ? (
-                <View style={styles.media}>
-                  <Ionicons name="film-outline" size={10} color={COLORS.WHITE} />
-                  <Text style={styles.media_text}>Filme</Text>
-                </View>
-              ) : (
-                <View style={styles.media}>
-                  <Ionicons name="ios-tv-outline" size={10} color={COLORS.WHITE} />
-                  <Text style={styles.media_text}>Série</Text>
-                </View>
-              )}
+              <MediaIcon type={summaryMovie.type} />
             </View>
 
             <View style={styles.genres}>

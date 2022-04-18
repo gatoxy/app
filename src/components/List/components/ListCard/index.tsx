@@ -2,17 +2,17 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { FontAwesome } from "@expo/vector-icons";
 import { COLORS } from "../../../../theme";
-import { Genre, Media } from "../../../../types";
+import { GenreType, MediaType } from "../../../../types";
 import { useApp } from "../../../../contexts/AppContext";
 
 interface Props {
-  data: Media;
+  data: MediaType;
 }
 
 export function ListCard({ data }: Props) {
   const { onOpenSummary, genres } = useApp();
 
-  let arrayGenres: Genre[] = [];
+  let arrayGenres: GenreType[] = [];
 
   data.genre_ids.map(genreId => {
     const find = genres.find(genre => genre.id === genreId);

@@ -2,18 +2,18 @@ import { createContext, ReactNode, RefObject, useContext, useEffect, useRef, use
 import { Modalize } from "react-native-modalize";
 import { IHandles } from "react-native-modalize/lib/options";
 import { getGenres } from "../hooks/useFetch";
-import { Genre, Media } from "../types";
+import { GenreType, MediaType } from "../types";
 
 interface AppProviderProps {
   children: ReactNode;
 }
 
 interface AppContextData {
-  onOpenSummary: (movie: Media) => void;
+  onOpenSummary: (movie: MediaType) => void;
   onCloseSummary: () => void;
   modalizeRef: RefObject<IHandles>;
-  summaryMovie: Media;
-  genres: Array<Genre>;
+  summaryMovie: MediaType;
+  genres: Array<GenreType>;
 }
 
 const AppContext = createContext({} as AppContextData);
@@ -21,10 +21,10 @@ const AppContext = createContext({} as AppContextData);
 export function AppProvider({ children }: AppProviderProps) {
   const modalizeRef = useRef<Modalize>(null);
 
-  const [summaryMovie, setSummaryMovie] = useState<Media>({} as Media);
-  const [genres, setGenres] = useState<Genre[]>([]);
+  const [summaryMovie, setSummaryMovie] = useState<MediaType>({} as MediaType);
+  const [genres, setGenres] = useState<GenreType[]>([]);
 
-  function onOpenSummary(movie: Media) {
+  function onOpenSummary(movie: MediaType) {
     setSummaryMovie(movie);
     modalizeRef.current?.open();
   }

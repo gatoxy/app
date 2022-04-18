@@ -11,7 +11,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 18,
     paddingVertical: 14,
     borderRadius: 16,
-    marginVertical: 16,
+    marginBottom: 16,
+    marginTop: 8,
   },
 
   input: {

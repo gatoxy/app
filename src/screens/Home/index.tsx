@@ -3,13 +3,13 @@ import { Banner } from "../../components/Banner";
 import { Carousel } from "../../components/Carousel";
 import { Layout } from "../../components/Layout";
 import { getDetails, getPopular, getUpcoming } from "../../hooks/useFetch";
-import { Media, MediaDetails } from "../../types";
+import { MediaType, DetailsType } from "../../types";
 
 export function Home() {
-  const [upcomingMovies, setUpcomingMovies] = useState<Media[]>([]);
-  const [popularMovies, setPopularMovies] = useState<Media[]>([]);
-  const [popularSeries, setPopularSeries] = useState<Media[]>([]);
-  const [movieFixed, setMovieFixed] = useState<MediaDetails>({} as MediaDetails);
+  const [upcomingMovies, setUpcomingMovies] = useState<MediaType[]>([]);
+  const [popularMovies, setPopularMovies] = useState<MediaType[]>([]);
+  const [popularSeries, setPopularSeries] = useState<MediaType[]>([]);
+  const [movieFixed, setMovieFixed] = useState<DetailsType>({} as DetailsType);
 
   useEffect(() => {
     getUpcoming().then(response => setUpcomingMovies(response.results));
@@ -19,7 +19,7 @@ export function Home() {
   }, []);
 
   return (
-    <Layout>
+    <Layout showHeader={false}>
       <Banner data={movieFixed} />
 
       <Carousel

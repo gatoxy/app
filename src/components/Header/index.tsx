@@ -1,10 +1,20 @@
-import { Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Text, TouchableOpacity } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 import { styles } from "./styles";
+import { COLORS } from "../../theme";
 
 export function Header() {
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Mediafy<Text style={styles.dote}>.</Text></Text>
-    </View>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.75}
+      onPress={() => navigation.goBack()}
+    >
+      <FontAwesome name="angle-left" size={24} color={COLORS.WHITE} />
+      <Text style={styles.text}>Voltar</Text>
+    </TouchableOpacity>
   );
 }
