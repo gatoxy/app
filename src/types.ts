@@ -1,4 +1,4 @@
-export type Media = {
+export type MediaType = {
   type: string;
   id: number;
   poster_path: string | null;
@@ -10,12 +10,12 @@ export type Media = {
   genre_ids: Array<number>;
 }
 
-export type Genre = {
+export type GenreType = {
   id: number;
   name: string;
 }
 
-export type MediaDetails = {
+export type DetailsType = {
   type: string;
   id: number;
   poster_path: string | null;
@@ -31,9 +31,16 @@ export type MediaDetails = {
   duration: number; // seasons or runtime
 }
 
-export type Cast = {
+export type CastType = {
   id: number;
   known_for_department: string;
   name: string;
   profile_path: string | null;
+}
+
+export type VideoType = {
+  key: string;
+  name: string;
+  site: string;
+  id: string;
 }

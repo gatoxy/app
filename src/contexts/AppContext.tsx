@@ -10,6 +10,7 @@ interface AppProviderProps {
 
 interface AppContextData {
   onOpenSummary: (movie: Media) => void;
+  onCloseSummary: () => void;
   modalizeRef: RefObject<IHandles>;
   summaryMovie: Media;
   genres: Array<Genre>;
@@ -28,6 +29,10 @@ export function AppProvider({ children }: AppProviderProps) {
     modalizeRef.current?.open();
   }
 
+  function onCloseSummary() {
+    modalizeRef.current?.close();
+  }
+
   useEffect(() => {
     getGenres().then(response => {
       setGenres(response.genres);
@@ -36,7 +41,7 @@ export function AppProvider({ children }: AppProviderProps) {
 
   return (
     <AppContext.Provider value={{
-      onOpenSummary, modalizeRef, summaryMovie, genres
+      onOpenSummary, onCloseSummary, modalizeRef, summaryMovie, genres
     }}>
       {children}
     </AppContext.Provider>

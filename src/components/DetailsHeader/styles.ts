@@ -2,24 +2,26 @@ import { StyleSheet } from "react-native";
 import { COLORS, FONTS } from "../../theme";
 
 export const styles = StyleSheet.create({
-  modal: {
-    backgroundColor: COLORS.DARK_SECONDARY,
-  },
-
   container: {
-    borderTopLeftRadius: 6,
-    borderTopRightRadius: 6,
-    backgroundColor: COLORS.DARK_SECONDARY,
-  },
 
-  body: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    paddingHorizontal: 8,
-    paddingVertical: 12,
   },
 
   image: {
+    width: "100%",
+    height: 250,
+  },
+
+  summary: {
+    flexDirection: "row",
+    alignItems: "flex-end",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    position: "relative",
+    bottom: 60,
+    marginBottom: -60,
+  },
+
+  poster: {
     width: 100,
     height: 150,
     borderRadius: 4,
@@ -29,7 +31,7 @@ export const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
-  
+
   title: {
     fontFamily: FONTS.BOLD,
     color: COLORS.WHITE,
@@ -53,7 +55,6 @@ export const styles = StyleSheet.create({
   average: {
     flexDirection: "row",
     alignItems: "center",
-    marginRight: 12,
   },
 
   average_text: {
@@ -87,25 +88,10 @@ export const styles = StyleSheet.create({
     marginRight: 12,
   },
 
-  description: {
+  duration: {
     fontFamily: FONTS.REGULAR,
     color: COLORS.WHITE,
     fontSize: 12,
-    lineHeight: 16,
-  },
-
-  button: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 12,
-    borderTopWidth: 1,
-    borderTopColor: "rgba(255, 255, 255, 0.1)",
-  },
-
-  button_text: {
-    fontFamily: FONTS.REGULAR,
-    color: COLORS.WHITE,
-    fontSize: 12,
-    marginLeft: 10,
+    marginRight: 12,
   },
 });

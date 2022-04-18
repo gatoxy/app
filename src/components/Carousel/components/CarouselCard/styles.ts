@@ -10,4 +10,10 @@ export const styles = StyleSheet.create({
     height: 160,
     borderRadius: 12,
   },
+  
+  image_small: {
+    width: 85,
+    height: 120,
+    borderRadius: 12,
+  },
 });

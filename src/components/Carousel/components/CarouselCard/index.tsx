@@ -5,9 +5,10 @@ import { styles } from "./styles";
 
 interface Props {
   data: Media;
+  small?: boolean;
 }
 
-export function CarouselCard({ data }: Props) {
+export function CarouselCard({ data, small = false }: Props) {
   const { onOpenSummary } = useApp();
 
   return (
@@ -17,7 +18,7 @@ export function CarouselCard({ data }: Props) {
       onPress={() => onOpenSummary(data)}
     >
       <Image
-        style={styles.image}
+        style={[styles.image, small && styles.image_small]}
         source={{
           uri: `https://image.tmdb.org/t/p/w500/${data.poster_path}`,
         }}

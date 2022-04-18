@@ -9,7 +9,7 @@ import { Genre } from "../../types";
 import { useNavigation } from "@react-navigation/native";
 
 export function Summary() {
-  const { modalizeRef, summaryMovie, genres } = useApp();
+  const { modalizeRef, summaryMovie, genres, onCloseSummary } = useApp();
 
   const navigation = useNavigation();
 
@@ -24,6 +24,8 @@ export function Summary() {
   });
 
   function navigateToDetails() {
+    onCloseSummary();
+
     navigation.navigate("Details", {
       id: summaryMovie.id,
       type: summaryMovie.type,
@@ -50,6 +52,18 @@ export function Summary() {
                 <FontAwesome name="star" size={10} color={COLORS.YELLOW} />
                 <Text style={styles.average_text}>{summaryMovie.vote_average}</Text>
               </View>
+
+              {summaryMovie.type === "movie" ? (
+                <View style={styles.media}>
+                  <Ionicons name="film-outline" size={10} color={COLORS.WHITE} />
+                  <Text style={styles.media_text}>Filme</Text>
+                </View>
+              ) : (
+                <View style={styles.media}>
+                  <Ionicons name="ios-tv-outline" size={10} color={COLORS.WHITE} />
+                  <Text style={styles.media_text}>Série</Text>
+                </View>
+              )}
             </View>
 
             <View style={styles.genres}>

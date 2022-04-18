@@ -24,6 +24,16 @@ interface ResponseGenreListTMDB {
   genres: Array<Genre>;
 }
 
+interface ResponseVideoListTMDB {
+  id: number;
+  results: Array<{
+    key: string;
+    name: string;
+    site: string;
+    id: string;
+  }>;
+}
+
 interface ResponseDetailsTMDB {
   type: string;
   id: number;
@@ -103,16 +113,32 @@ export async function getPopular(media: string, page: number = 1) { // Movies or
 }
 
 
-export async function getRecommendations(id: number) {
+export async function getRecommendations(media: string, id: number) {
+  const response = await tmdb.get<ResponseMediaTMDB>(`/${media}/${id}/recommendations`);
 
+  const results = response.data.results.map(item => {
+    return {
+      type: media,
+      id: item.id,
+      poster_path: item.poster_path,
+      backdrop_path: item.backdrop_path,
+      overview: item.overview,
+      title: item.title || item.name,
+      release_date: item.release_date || item.first_air_date,
+      vote_average: item.vote_average,
+      genre_ids: item.genre_ids,
+    }
+  });
+
+  return {
+    results: results,
+  }
 }
 
-export async function getPerson(id: number) {
+export async function getVideos(media: string, id: number) {
+  const response = await tmdb.get<ResponseVideoListTMDB>(`/${media}/${id}/videos`);
 
-}
-
-export async function getVideos(id: number) {
-
+  return response.data.results;
 }
 
 export async function getGenres() {

@@ -3,25 +3,21 @@ import { COLORS, FONTS } from "../../theme";
 
 export const styles = StyleSheet.create({
   container: {
-    
-  },
-
-  overview: {
     paddingHorizontal: 16,
     marginBottom: 12,
+    alignItems: "flex-start",
   },
 
-  overview_header: {
+  title: {
     fontFamily: FONTS.MEDIUM,
     color: COLORS.WHITE,
     fontSize: 14,
     marginBottom: 6,
   },
 
-  overview_content: {
-    fontFamily: FONTS.REGULAR,
-    color: COLORS.WHITE,
-    fontSize: 12,
-    lineHeight: 18,
+  image: {
+    height: 30,
+    width: 30,
+    borderRadius: 30,
   },
 });

@@ -17,7 +17,7 @@ export function Layout({ children, hidden = false }: Props) {
       <StatusBar style="light" />
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        {!hidden && <Header />}
+        {/* {!hidden && <Header />} */}
 
         {children}
       </ScrollView>
