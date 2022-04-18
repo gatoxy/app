@@ -5,6 +5,9 @@ import { CastType } from "../../types";
 import { Loading } from "../Loading";
 import { styles } from "./styles";
 
+import DefaultImage from "../../assets/poster-default.png";
+const DEFAULT_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
+
 interface Props {
   type: string;
   id: number;
@@ -34,7 +37,7 @@ export function Cast({ type, id }: Props) {
           renderItem={({ item }) => <Image
             style={styles.image}
             source={{
-              uri: `https://image.tmdb.org/t/p/w500/${item.profile_path}`
+              uri: item.profile_path ? `https://image.tmdb.org/t/p/w500/${item.profile_path}` : DEFAULT_IMAGE,
             }}
           />}
           keyExtractor={item => item.id.toString()}

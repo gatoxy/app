@@ -7,6 +7,9 @@ import { MediaIcon } from "../MediaIcon";
 import { Average } from "../Average";
 import { Genres } from "../Genres";
 
+import DefaultImage from "../../assets/backdrop-default.png";
+const DEFAULT_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
+
 interface Props {
   data: DetailsType;
 }
@@ -29,7 +32,7 @@ export function Banner({ data }: Props) {
         <Image
           style={styles.image}
           source={{
-            uri: `https://image.tmdb.org/t/p/original/${data.backdrop_path}`,
+            uri: data.backdrop_path ? `https://image.tmdb.org/t/p/original/${data.backdrop_path}` : DEFAULT_IMAGE,
           }}
         />
       </TouchableOpacity>

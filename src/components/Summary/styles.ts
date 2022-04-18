@@ -29,6 +29,21 @@ export const styles = StyleSheet.create({
   content: {
     flex: 1,
   },
+
+  content_header: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+  },
+
+  close: {
+    height: 20,
+    width: 20,
+    borderRadius: 20,
+    backgroundColor: COLORS.GRAY,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   
   title: {
     fontFamily: FONTS.BOLD,

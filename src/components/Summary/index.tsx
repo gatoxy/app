@@ -10,14 +10,17 @@ import { MediaIcon } from "../MediaIcon";
 import { Average } from "../Average";
 import { Genres } from "../Genres";
 
+import DefaultImage from "../../assets/poster-default.png";
+const DEFAULT_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
+
 export function Summary() {
-  const { modalizeRef, summaryMovie, genres, onCloseSummary } = useApp();
+  const { modalizeRef, mediaOnSummary, genres, onCloseSummary } = useApp();
 
   const navigation = useNavigation();
 
   let arrayGenres: GenreType[] = [];
 
-  summaryMovie.genre_ids?.map(genreId => {
+  mediaOnSummary.genre_ids?.map(genreId => {
     const find = genres.find(genre => genre.id === genreId);
 
     if (find) {
@@ -26,12 +29,16 @@ export function Summary() {
   });
 
   function navigateToDetails() {
-    onCloseSummary();
+    const myPromise = new Promise((resolve, reject) => {
+      resolve(onCloseSummary());
+    });
 
-    navigation.navigate("Details", {
-      id: summaryMovie.id,
-      type: summaryMovie.type,
-    })
+    myPromise.then(() => {
+      navigation.navigate("Details", {
+        id: mediaOnSummary.id,
+        type: mediaOnSummary.type,
+      });
+    });
   }
 
   return (
@@ -41,21 +48,28 @@ export function Summary() {
           <Image
             style={styles.image}
             source={{
-              uri: `https://image.tmdb.org/t/p/w500/${summaryMovie.poster_path}`
+              uri: mediaOnSummary.poster_path ? `https://image.tmdb.org/t/p/w500/${mediaOnSummary.poster_path}` : DEFAULT_IMAGE,
             }}
           />
 
           <View style={styles.content}>
-            <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{summaryMovie.title}</Text>
+            <View style={styles.content_header}>
+              <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{mediaOnSummary.title}</Text>
+
+              <TouchableOpacity activeOpacity={0.75} style={styles.close} onPress={onCloseSummary}>
+                <Ionicons name="close" size={16} color={COLORS.WHITE} />
+              </TouchableOpacity>
+            </View>
+
             <View style={styles.row}>
-              <Text style={styles.year}>{new Date(summaryMovie.release_date).getFullYear()}</Text>
-              <Average vote_average={summaryMovie.vote_average} />
-              <MediaIcon type={summaryMovie.type} />
+              <Text style={styles.year}>{new Date(mediaOnSummary.release_date).getFullYear()}</Text>
+              <Average vote_average={mediaOnSummary.vote_average} />
+              <MediaIcon type={mediaOnSummary.type} />
             </View>
 
             <Genres data={arrayGenres} />
 
-            <Text style={styles.description} numberOfLines={4} ellipsizeMode="tail">{summaryMovie.overview}</Text>
+            <Text style={styles.description} numberOfLines={4} ellipsizeMode="tail">{mediaOnSummary.overview}</Text>
           </View>
         </View>
 

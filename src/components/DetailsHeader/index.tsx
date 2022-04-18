@@ -5,6 +5,12 @@ import { MediaIcon } from "../MediaIcon";
 import { Average } from "../Average";
 import { Genres } from "../Genres";
 
+import DefaultImageBackdrop from "../../assets/backdrop-default.png";
+const DEFAULT_IMAGE_BACKDROP = Image.resolveAssetSource(DefaultImageBackdrop).uri;
+
+import DefaultImagePoster from "../../assets/poster-default.png";
+const DEFAULT_IMAGE_POSTER = Image.resolveAssetSource(DefaultImagePoster).uri;
+
 interface Props {
   data: DetailsType;
 }
@@ -15,7 +21,7 @@ export function DetailsHeader({ data }: Props) {
       <Image
         style={styles.image}
         source={{
-          uri: `https://image.tmdb.org/t/p/original/${data.backdrop_path}`,
+          uri: data.backdrop_path ? `https://image.tmdb.org/t/p/original/${data.backdrop_path}` : DEFAULT_IMAGE_BACKDROP,
         }}
       />
 
@@ -23,7 +29,7 @@ export function DetailsHeader({ data }: Props) {
         <Image
           style={styles.poster}
           source={{
-            uri: `https://image.tmdb.org/t/p/w500/${data.poster_path}`
+            uri: data.poster_path ? `https://image.tmdb.org/t/p/w500/${data.poster_path}` : DEFAULT_IMAGE_POSTER,
           }}
         />
 

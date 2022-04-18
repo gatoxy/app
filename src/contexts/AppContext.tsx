@@ -12,7 +12,7 @@ interface AppContextData {
   onOpenSummary: (movie: MediaType) => void;
   onCloseSummary: () => void;
   modalizeRef: RefObject<IHandles>;
-  summaryMovie: MediaType;
+  mediaOnSummary: MediaType;
   genres: Array<GenreType>;
 }
 
@@ -21,11 +21,11 @@ const AppContext = createContext({} as AppContextData);
 export function AppProvider({ children }: AppProviderProps) {
   const modalizeRef = useRef<Modalize>(null);
 
-  const [summaryMovie, setSummaryMovie] = useState<MediaType>({} as MediaType);
+  const [mediaOnSummary, setMediaOnSummary] = useState<MediaType>({} as MediaType);
   const [genres, setGenres] = useState<GenreType[]>([]);
 
   function onOpenSummary(movie: MediaType) {
-    setSummaryMovie(movie);
+    setMediaOnSummary(movie);
     modalizeRef.current?.open();
   }
 
@@ -41,7 +41,7 @@ export function AppProvider({ children }: AppProviderProps) {
 
   return (
     <AppContext.Provider value={{
-      onOpenSummary, onCloseSummary, modalizeRef, summaryMovie, genres
+      onOpenSummary, onCloseSummary, modalizeRef, mediaOnSummary, genres
     }}>
       {children}
     </AppContext.Provider>

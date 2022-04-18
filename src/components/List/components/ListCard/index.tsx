@@ -10,6 +10,9 @@ interface Props {
   data: MediaType;
 }
 
+import DefaultImage from "../../../../assets/backdrop-default.png";
+const DEFAULT_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
+
 export function ListCard({ data }: Props) {
   const { onOpenSummary, genres } = useApp();
 
@@ -32,7 +35,7 @@ export function ListCard({ data }: Props) {
         <Image
           style={styles.image}
           source={{
-            uri: `https://image.tmdb.org/t/p/w500/${data.backdrop_path}`
+            uri: data.backdrop_path ? `https://image.tmdb.org/t/p/w500/${data.backdrop_path}` : DEFAULT_IMAGE
           }}
         />
       </TouchableOpacity>
