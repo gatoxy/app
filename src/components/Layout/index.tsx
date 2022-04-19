@@ -1,5 +1,6 @@
+import { useRoute } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Header } from "../Header";
 import { Navbar } from "../Navbar";

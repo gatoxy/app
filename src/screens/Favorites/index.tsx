@@ -5,7 +5,7 @@ export function Favorites() {
   return (
     <Layout showHeader={true}>
       <View>
-        <Text>Favoritos</Text>
+        
       </View>
     </Layout>
   );

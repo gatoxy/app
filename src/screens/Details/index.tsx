@@ -50,7 +50,14 @@ export function Details({ route }: Props) {
 
   return (
     <Layout showHeader={true}>
-      {loading ? <Loading /> : (
+      {loading ? (
+        <View style={{
+          height: 150,
+          justifyContent: "center",
+        }}>
+          <Loading />
+        </View>
+      ) : (
         <View>
           <DetailsHeader data={details} />
           <Cast data={cast} />

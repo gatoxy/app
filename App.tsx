@@ -1,13 +1,7 @@
-import AppLoading from "expo-app-loading";
-
-import { Home } from "./src/screens/Home";
-import { Movies } from "./src/screens/Movies";
-import { Series } from "./src/screens/Series";
-import { Favorites } from "./src/screens/Favorites";
-import { Details } from "./src/screens/Details";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AppProvider } from "./src/contexts/AppContext";
+import { Routes } from "./src/routes";
+
+import AppLoading from "expo-app-loading";
 
 import {
   useFonts,
@@ -15,16 +9,6 @@ import {
   Roboto_500Medium,
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
-
-export type RootStackParamList = {
-  Home: undefined;
-  Movies: undefined;
-  Series: undefined;
-  Details: { id: number, type: string };
-  Favorites: undefined;
-}
-
-const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -39,20 +23,7 @@ export default function App() {
 
   return (
     <AppProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Home"
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Movies" component={Movies} />
-          <Stack.Screen name="Series" component={Series} />
-          <Stack.Screen name="Favorites" component={Favorites} />
-          <Stack.Screen name="Details" component={Details} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <Routes />
     </AppProvider>
   );
 }
