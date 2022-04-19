@@ -50,6 +50,7 @@ export const styles = StyleSheet.create({
     color: COLORS.WHITE,
     fontSize: 14,
     marginBottom: 6,
+    flex: 1,
   },
 
   row: {

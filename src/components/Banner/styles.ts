@@ -3,46 +3,50 @@ import { COLORS, FONTS } from "../../theme";
 
 export const styles = StyleSheet.create({
   container: {
-
+    position: "relative",
+    marginBottom: 16,
   },
 
   image: {
     width: "100%",
-    height: 250,
-  },
-
-  title: {
-    fontFamily: FONTS.MEDIUM,
-    color: COLORS.WHITE,
-    fontSize: 12,
-    textAlign: "center",
-    marginTop: 8,
+    height: 335,
   },
 
   row: {
-    flexDirection: "row",
+    position: "absolute",
     alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 16,
+    width: "100%",
+    height: "100%",
+    justifyContent: "flex-end",
+    paddingHorizontal: 16,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
 
-  year: {
-    fontFamily: FONTS.REGULAR,
+  content: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  title: {
+    fontFamily: FONTS.BOLD,
     color: COLORS.WHITE,
     fontSize: 12,
   },
 
   button: {
-    marginHorizontal: 16,
     backgroundColor: COLORS.WHITE,
-    paddingHorizontal: 20,
     paddingVertical: 8,
+    paddingHorizontal: 22,
     borderRadius: 6,
+    marginRight: 12,
+    flexDirection: "row",
   },
 
   button_text: {
-    fontFamily: FONTS.REGULAR,
-    color: COLORS.DARK_PRIMARY,
+    fontFamily: FONTS.MEDIUM,
     fontSize: 12,
+    color: COLORS.DARK_PRIMARY,
+    marginLeft: 6,
   },
 });

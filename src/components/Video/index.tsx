@@ -1,21 +1,16 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { View } from "react-native";
 import { styles } from "./styles";
 import { VideoType } from "../../types";
-import { getVideos } from "../../hooks/useFetch";
-import { Loading } from "../Loading";
 
 import YoutubePlayer from "react-native-youtube-iframe";
 
 interface Props {
-  type: string;
-  id: number;
+  data: Array<VideoType>;
 }
 
-export function Video({ type, id }: Props) {
-  const [videos, setVideos] = useState<VideoType[]>([]);
+export function Video({ data }: Props) {
   const [playing, setPlaying] = useState(true);
-  const [loading, setLoading] = useState(true);
 
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
@@ -23,26 +18,15 @@ export function Video({ type, id }: Props) {
     }
   }, []);
 
-  useEffect(() => {
-    setLoading(true);
-
-    getVideos(type, id).then(response => {
-      setVideos(response);
-      setLoading(false);
-    });
-  }, [id]);
-
   return (
     <View style={styles.container}>
-      {loading ? <Loading /> : (
-        <YoutubePlayer
-          height={216}
-          mute={true}
-          play={playing}
-          videoId={videos[0]?.key}
-          onChangeState={onStateChange}
-        />
-      )}
+      <YoutubePlayer
+        height={200}
+        mute={true}
+        play={playing}
+        videoId={data[0]?.key}
+        onChangeState={onStateChange}
+      />
     </View>
   );
 }

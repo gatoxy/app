@@ -1,11 +1,14 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { DetailsType } from "../../types";
 import { styles } from "./styles";
-import { useApp } from "../../contexts/AppContext";
-import { useNavigation } from "@react-navigation/native";
-import { MediaIcon } from "../MediaIcon";
-import { Average } from "../Average";
 import { Genres } from "../Genres";
+import { Average } from "../Average";
+import { MediaIcon } from "../MediaIcon";
+import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
+import { COLORS } from "../../theme";
+
+import LinearGradient from "react-native-linear-gradient";
 
 import DefaultImage from "../../assets/backdrop-default.png";
 const DEFAULT_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
@@ -15,10 +18,8 @@ interface Props {
 }
 
 export function Banner({ data }: Props) {
-  const { onOpenSummary } = useApp();
-
   const navigation = useNavigation();
-  
+
   function navigateToDetails() {
     navigation.navigate("Details", {
       id: data.id,
@@ -28,25 +29,34 @@ export function Banner({ data }: Props) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity activeOpacity={0.75} onPress={navigateToDetails}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: data.backdrop_path ? `https://image.tmdb.org/t/p/original/${data.backdrop_path}` : DEFAULT_IMAGE,
-          }}
-        />
-      </TouchableOpacity>
+      <Image
+        style={styles.image}
+        source={{
+          uri: data.backdrop_path ? `https://image.tmdb.org/t/p/original/${data.backdrop_path}` : DEFAULT_IMAGE,
+        }}
+      />
 
-      <Text style={styles.title}>{data.title}</Text>
-
-      <Genres data={data.genres} textAlign="center" />
+      <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
+        <Text style={styles.buttonText}>
+          Sign in with Facebook
+        </Text>
+      </LinearGradient>
 
       <View style={styles.row}>
-        <Text style={styles.year}>{new Date(data.release_date).getFullYear()}</Text>
+        <Text style={styles.title}>{data.title}</Text>
 
-        <Average vote_average={data.vote_average} />
+        <Genres data={data.genres} textAlign="center" />
 
-        <MediaIcon type={data.type} />
+        <View style={styles.content}>
+          <Average vote_average={data.vote_average} />
+
+          <TouchableOpacity activeOpacity={0.85} style={styles.button} onPress={navigateToDetails}>
+            <Ionicons name="play" size={16} color={COLORS.DARK_PRIMARY} />
+            <Text style={styles.button_text}>Assistir</Text>
+          </TouchableOpacity>
+
+          <MediaIcon type={data.type} />
+        </View>
       </View>
     </View>
   );

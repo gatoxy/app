@@ -1,6 +1,6 @@
-import { ActivityIndicator, FlatList, ScrollView, Text, View } from "react-native";
-import { COLORS } from "../../theme";
+import { FlatList, ScrollView, Text, View } from "react-native";
 import { MediaType } from "../../types";
+import { Loading } from "../Loading";
 import { ListCard } from "./components/ListCard";
 import { styles } from "./styles";
 
@@ -16,10 +16,8 @@ export function List({ data, title, loading, currentPage, numberPages }: Props) 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.subtitle}>Página {currentPage} de {numberPages}</Text>
-      {loading ? (
-        <ActivityIndicator size="small" color={COLORS.DARK_SECONDARY} />
-      ) : (
+      { numberPages !== 0 && <Text style={styles.subtitle}>Página {currentPage} de {numberPages}</Text> }
+      {loading ? <Loading /> : (
         <ScrollView
           horizontal={true}
           contentContainerStyle={{

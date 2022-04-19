@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { Layout } from "../../components/Layout";
-import { getDetails, getRecommendations } from "../../hooks/useFetch";
-import { MediaType, DetailsType } from "../../types";
+import { getCredits, getDetails, getRecommendations, getVideos } from "../../hooks/useFetch";
+import { MediaType, DetailsType, VideoType, CastType } from "../../types";
 import { styles } from "./styles";
 import { Carousel } from "../../components/Carousel";
 import { DetailsHeader } from "../../components/DetailsHeader";
@@ -23,33 +23,46 @@ export function Details({ route }: Props) {
   const { id, type } = route.params;
 
   const [details, setDetails] = useState<DetailsType>({} as DetailsType);
+  const [videos, setVideos] = useState<VideoType[]>([]);
+  const [cast, setCast] = useState<CastType[]>([]);
   const [recommendations, setRecommendations] = useState<MediaType[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
+    async function initialLoad() {
+      setLoading(true);
 
-    getDetails(type, id).then(response => {
-      setDetails(response);
+      const detailsResponse = await getDetails(type, id);
+      const castResponse = await getCredits(type, id);
+      const recommendationsResponse = await getRecommendations(type, id);
+      const videosResponse = await getVideos(type, id);
+
+      setDetails(detailsResponse);
+      setCast(castResponse);
+      setRecommendations(recommendationsResponse.results);
+      setVideos(videosResponse);
+      
       setLoading(false);
-    });
+    }
 
-    getRecommendations(type, id).then(response => {
-      setRecommendations(response.results);
-    });
+    initialLoad();
   }, [id]);
 
   return (
     <Layout showHeader={true}>
-      {loading ? <Loading /> : <DetailsHeader data={details} />}
-      <Cast type={type} id={id} />
-      {loading ? <Loading /> : <Overview overview={details.overview} />}
-      <Video type={type} id={id} />
-      <Carousel
-        title="Filmes similares"
-        data={recommendations}
-        small={true}
-      />
+      {loading ? <Loading /> : (
+        <View>
+          <DetailsHeader data={details} />
+          <Cast data={cast} />
+          <Overview overview={details.overview} />
+          <Video data={videos} />
+          <Carousel
+            title="Recomendados"
+            data={recommendations}
+            small={true}
+          />
+        </View>
+      )}
     </Layout>
   );
 }
