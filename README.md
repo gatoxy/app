@@ -2,6 +2,8 @@
 
 Aplicativo desenvolvido com React Native que lista filmes e séries disponibilizados pelo The Movie Database API
 
+Veja o resultado do projeto publicado no Expo clicando <b><a href="https://expo.dev/@luizs/mediafy-mobile">aqui</a></b>
+
 ### Funcionalidades
 - Listar filmes que serão lançados ainda esse ano
 - Listar filmes e séries que são tendência no momento
