@@ -15,6 +15,7 @@ Aplicativo desenvolvido com React Native que lista filmes e séries disponibiliz
 
 ### Tecnologias
 - React Native
+- Typescript
 - Expo
 - React Navigation
 - Axios
