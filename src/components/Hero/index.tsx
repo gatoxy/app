@@ -7,8 +7,7 @@ import { MediaIcon } from "../MediaIcon";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../theme";
-
-import LinearGradient from "react-native-linear-gradient";
+import { LinearGradient } from "expo-linear-gradient";
 
 import DefaultImage from "../../assets/backdrop-default.png";
 const DEFAULT_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
@@ -17,7 +16,7 @@ interface Props {
   data: DetailsType;
 }
 
-export function Banner({ data }: Props) {
+export function Hero({ data }: Props) {
   const navigation = useNavigation();
 
   function navigateToDetails() {
@@ -36,13 +35,7 @@ export function Banner({ data }: Props) {
         }}
       />
 
-      <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} style={styles.linearGradient}>
-        <Text style={styles.buttonText}>
-          Sign in with Facebook
-        </Text>
-      </LinearGradient>
-
-      <View style={styles.row}>
+      <LinearGradient colors={["transparent", COLORS.DARK_PRIMARY]} locations={[0, 1]} style={styles.row}>
         <Text style={styles.title}>{data.title}</Text>
 
         <Genres data={data.genres} textAlign="center" />
@@ -57,7 +50,7 @@ export function Banner({ data }: Props) {
 
           <MediaIcon type={data.type} />
         </View>
-      </View>
+      </LinearGradient>
     </View>
   );
 }

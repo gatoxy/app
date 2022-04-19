@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Banner } from "../../components/Banner";
+import { Hero } from "../../components/Hero";
 import { Carousel } from "../../components/Carousel";
 import { Layout } from "../../components/Layout";
 import { getDetails, getPopular, getUpcoming } from "../../hooks/useFetch";
@@ -20,7 +20,7 @@ export function Home() {
 
   return (
     <Layout showHeader={false}>
-      <Banner data={movieFixed} />
+      <Hero data={movieFixed} />
 
       <Carousel
         title="Filmes que serão lançados em breve"

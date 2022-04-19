@@ -41,7 +41,7 @@ export function Details({ route }: Props) {
       setCast(castResponse);
       setRecommendations(recommendationsResponse.results);
       setVideos(videosResponse);
-      
+
       setLoading(false);
     }
 
@@ -56,11 +56,13 @@ export function Details({ route }: Props) {
           <Cast data={cast} />
           <Overview overview={details.overview} />
           <Video data={videos} />
-          <Carousel
-            title="Recomendados"
-            data={recommendations}
-            small={true}
-          />
+          {recommendations.length > 0 && (
+            <Carousel
+              title="Recomendados"
+              data={recommendations}
+              small={true}
+            />
+          )}
         </View>
       )}
     </Layout>

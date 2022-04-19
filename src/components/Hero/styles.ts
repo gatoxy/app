@@ -20,12 +20,12 @@ export const styles = StyleSheet.create({
     justifyContent: "flex-end",
     paddingHorizontal: 16,
     bottom: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
 
   content: {
     flexDirection: "row",
     alignItems: "center",
+    marginTop: 2,
   },
 
   title: {
