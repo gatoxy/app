@@ -4,6 +4,8 @@ Aplicativo desenvolvido com React Native que lista filmes e séries disponibiliz
 
 Veja o resultado do projeto publicado no Expo clicando <b><a href="https://expo.dev/@luizs/mediafy-mobile">aqui</a></b>
 
+Clique <a href="[https://expo.dev/@luizs/mediafy-mobile](https://github.com/luizsp7m/movies)">aqui</a> para ver a versão web desse projeto
+
 ### Funcionalidades
 - Listar filmes que serão lançados ainda esse ano
 - Listar filmes e séries que são tendência no momento
